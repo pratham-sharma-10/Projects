@@ -4,6 +4,7 @@ import SpriteText from 'three-spritetext'
 import * as THREE from 'three'
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { vault } from '../lib/notes.js'
+import { buildGalaxy } from '../lib/galaxy.js'
 
 export default function Universe({ selectedId, onSelect }) {
   const fgRef = useRef()
@@ -12,10 +13,22 @@ export default function Universe({ selectedId, onSelect }) {
   useEffect(() => {
     const fg = fgRef.current
     if (!fg) return
-    const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 1.1, 0.45, 0.1)
+    const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 1.05, 0.45, 0.12)
     fg.postProcessingComposer().addPass(bloom)
     fg.d3Force('charge').strength(-60)
-    return () => fg.postProcessingComposer().removePass(bloom)
+
+    const scene = fg.scene()
+    const scenery = buildGalaxy()
+    scenery.forEach((obj) => scene.add(obj))
+
+    const controls = fg.controls()
+    controls.autoRotate = true
+    controls.autoRotateSpeed = 0.45
+
+    return () => {
+      fg.postProcessingComposer().removePass(bloom)
+      scenery.forEach((obj) => scene.remove(obj))
+    }
   }, [])
 
   // Fly the camera to a note when it gets selected (e.g. from search/browse).
@@ -27,7 +40,7 @@ export default function Universe({ selectedId, onSelect }) {
 
   function flyTo(node) {
     const dist = Math.hypot(node.x, node.y, node.z) || 1
-    const ratio = 1 + 110 / dist
+    const ratio = 1 + 170 / dist
     fgRef.current.cameraPosition(
       { x: node.x * ratio, y: node.y * ratio, z: node.z * ratio },
       node,

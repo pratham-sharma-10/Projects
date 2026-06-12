@@ -11,6 +11,7 @@ Start with [[How to grow this brain]] to see how notes, folders and links work.
 
 ## What lives here
 
+- [[About Pratham]] — who's behind this brain
 - [[Project Ideas]] — things I want to build
 - [[Learning Queue]] — what I'm studying next
 - [[Claude Code Notes]] — notes on my main building tool

@@ -37,7 +37,7 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          <span className="pulse" /> prat.brain <span className="version">v0.1</span>
+          <span className="pulse" /> prat.brain <span className="version">v0.2</span>
         </div>
 
         <div className="search">

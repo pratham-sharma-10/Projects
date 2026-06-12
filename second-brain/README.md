@@ -47,6 +47,6 @@ Frontmatter is optional; without it the filename becomes the title.
 ## Deploying to GitHub Pages
 
 The workflow in `.github/workflows/deploy-second-brain.yml` deploys on every
-push to `main` that touches `second-brain/`. Pages is enabled automatically
-on the first run; if it ever gets disabled, set *Source* to **GitHub Actions**
-in the repo's **Settings → Pages**.
+push to `main` that touches `second-brain/`. One-time setup: in the repo's
+**Settings → Pages**, set *Source* to **GitHub Actions** (the workflow token
+isn't allowed to enable Pages by itself).

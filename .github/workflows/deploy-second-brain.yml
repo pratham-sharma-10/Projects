@@ -25,6 +25,10 @@ jobs:
         working-directory: second-brain
     steps:
       - uses: actions/checkout@v4
+      # enablement: true switches Pages on automatically on first run
+      - uses: actions/configure-pages@v4
+        with:
+          enablement: true
       - uses: actions/setup-node@v4
         with:
           node-version: 22

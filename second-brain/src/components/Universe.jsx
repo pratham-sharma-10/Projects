@@ -4,7 +4,7 @@ import SpriteText from 'three-spritetext'
 import * as THREE from 'three'
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { vault } from '../lib/notes.js'
-import { buildGalaxy } from '../lib/galaxy.js'
+import { buildGalaxy, makeStarNode } from '../lib/galaxy.js'
 
 export default function Universe({ selectedId, onSelect }) {
   const fgRef = useRef()
@@ -13,21 +13,35 @@ export default function Universe({ selectedId, onSelect }) {
   useEffect(() => {
     const fg = fgRef.current
     if (!fg) return
-    const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 1.05, 0.45, 0.12)
+    const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.7, 0.55, 0.2)
     fg.postProcessingComposer().addPass(bloom)
     fg.d3Force('charge').strength(-60)
 
+    // Crisper rendering on high-DPI screens.
+    fg.renderer().setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
+
     const scene = fg.scene()
-    const scenery = buildGalaxy()
-    scenery.forEach((obj) => scene.add(obj))
+    const galaxy = buildGalaxy()
+    galaxy.objects.forEach((obj) => scene.add(obj))
 
     const controls = fg.controls()
     controls.autoRotate = true
-    controls.autoRotateSpeed = 0.45
+    controls.autoRotateSpeed = 0.4
+
+    // Drive the twinkle/drift animation from the render loop.
+    const clock = new THREE.Clock()
+    let raf
+    const animate = () => {
+      galaxy.update(clock.getElapsedTime())
+      raf = requestAnimationFrame(animate)
+    }
+    animate()
 
     return () => {
+      cancelAnimationFrame(raf)
       fg.postProcessingComposer().removePass(bloom)
-      scenery.forEach((obj) => scene.remove(obj))
+      galaxy.objects.forEach((obj) => scene.remove(obj))
+      galaxy.dispose()
     }
   }, [])
 
@@ -59,21 +73,25 @@ export default function Universe({ selectedId, onSelect }) {
           n.isHub ? '' : `<div class="node-tip"><b>${n.title}</b><br/>${n.constellation}</div>`
         }
         nodeColor={(n) => n.color}
-        nodeOpacity={0.92}
-        nodeResolution={16}
         nodeVal={(n) => (n.isHub ? 0.01 : 1.5 + n.degree * 0.9)}
         nodeThreeObject={(n) => {
-          if (!n.isHub) return false
-          const sprite = new SpriteText(n.title.toUpperCase().replace(/-/g, ' '))
-          sprite.color = n.color
-          sprite.textHeight = 5
-          sprite.material.transparent = true
-          sprite.material.opacity = 0.55
-          return sprite
+          if (n.isHub) {
+            const sprite = new SpriteText(n.title.toUpperCase().replace(/-/g, ' '))
+            sprite.color = n.color
+            sprite.textHeight = 5.5
+            sprite.fontWeight = '600'
+            sprite.material.transparent = true
+            sprite.material.opacity = 0.5
+            return sprite
+          }
+          return makeStarNode(n.color, n.degree)
         }}
-        linkColor={(l) => (l.kind === 'hub' ? '#ffffff' : '#9db4ff')}
-        linkOpacity={0.12}
-        linkWidth={(l) => (l.kind === 'hub' ? 0 : 0.6)}
+        linkColor={(l) => (l.kind === 'hub' ? '#ffffff' : '#8fb4ff')}
+        linkOpacity={0.18}
+        linkWidth={(l) => (l.kind === 'hub' ? 0 : 0.7)}
+        linkDirectionalParticles={(l) => (l.kind === 'hub' ? 0 : 2)}
+        linkDirectionalParticleWidth={0.8}
+        linkDirectionalParticleSpeed={0.004}
         onNodeClick={(n) => {
           flyTo(n)
           if (!n.isHub) onSelect(n.id)

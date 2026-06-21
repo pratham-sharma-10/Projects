@@ -21,7 +21,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.linkedin.com/jobs/*", "https://www.linkedin.com/job/*"],
+      "matches": ["https://www.linkedin.com/*"],
       "js": ["content.js"],
       "css": ["content.css"],
       "run_at": "document_idle"

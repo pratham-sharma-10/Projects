@@ -15,15 +15,25 @@ const DEFAULTS = {
 
 let settings = { ...DEFAULTS };
 
+// Set to true to print what the filter is finding to the browser console
+// (prefixed with [LRF]). Handy for debugging on LinkedIn UI variants.
+const DEBUG = true;
+
 // Selectors that have historically matched a single job card / list item.
 // We try several because LinkedIn renames classes often; matching any one of
-// these is enough to grab the card container.
+// these is enough to grab the card container. Includes the newer "beta"
+// search card structures.
 const CARD_SELECTORS = [
   "li[data-occludable-job-id]",
   "div[data-job-id]",
   "li.scaffold-layout__list-item",
   ".job-card-container",
-  ".jobs-search-results__list-item"
+  ".jobs-search-results__list-item",
+  ".job-card-job-posting-card-wrapper",
+  "[data-view-name='job-card']",
+  "li.jobs-search-results__list-item",
+  "div.job-card-list",
+  "li[data-occludable-entity-urn]"
 ];
 
 const PROCESSED_ATTR = "data-lrf-processed";
@@ -34,10 +44,18 @@ const MARK_ATTR = "data-lrf-reposted";
 const REPOST_RE = /\breposted\b/i;
 
 function isReposted(card) {
-  // Prefer the footer / metadata area when present to reduce false positives,
-  // but fall back to the whole card text.
-  const text = card.innerText || card.textContent || "";
-  return REPOST_RE.test(text);
+  // Use textContent (not innerText) so we also catch the "Reposted" label even
+  // when LinkedIn keeps it as visually-hidden / screen-reader-only text, plus
+  // aria-labels which often spell out "Reposted N days ago".
+  const text = card.textContent || "";
+  if (REPOST_RE.test(text)) return true;
+
+  // Some cards expose the status only via aria-label on a child element.
+  const labelled = card.querySelector("[aria-label]");
+  if (labelled && REPOST_RE.test(labelled.getAttribute("aria-label") || "")) {
+    return true;
+  }
+  return false;
 }
 
 function applyToCard(card) {
@@ -83,6 +101,15 @@ function scan() {
     card.setAttribute(PROCESSED_ATTR, "true");
     applyToCard(card);
   });
+
+  if (DEBUG) {
+    const reposted = document.querySelectorAll(`[${MARK_ATTR}]`).length;
+    const anywhere = REPOST_RE.test(document.body.textContent || "");
+    console.debug(
+      `[LRF] cards detected: ${cards.size} | reposted matched: ${reposted} | ` +
+        `"Reposted" anywhere on page: ${anywhere} | mode: ${settings.mode} | enabled: ${settings.enabled}`
+    );
+  }
 }
 
 // Re-apply styling to already-marked cards when settings change, without a

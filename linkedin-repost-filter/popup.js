@@ -44,7 +44,7 @@ function showUnavailable() {
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const tab = tabs[0];
-  if (!tab || !tab.url || !/https:\/\/www\.linkedin\.com\/jobs?\//.test(tab.url)) {
+  if (!tab || !tab.url || !/https:\/\/www\.linkedin\.com\//.test(tab.url)) {
     showUnavailable();
     return;
   }

@@ -127,6 +127,16 @@ function init() {
     refreshMarked();
     scheduleScan();
   });
+
+  // Answer the popup's request for how many reposted jobs are on the page.
+  chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+    if (msg && msg.type === "getRepostCount") {
+      // Make sure the count reflects what's currently rendered.
+      scan();
+      sendResponse({ count: document.querySelectorAll(`[${MARK_ATTR}]`).length });
+    }
+    return true;
+  });
 }
 
 if (document.body) {

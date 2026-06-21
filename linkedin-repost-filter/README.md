@@ -38,6 +38,7 @@ Click the toolbar icon to:
 
 - Toggle the filter on/off.
 - Choose **Blur**, **Hide completely**, or **Grey out**.
+- See a live **count** of how many reposted jobs were found on the current page.
 
 Settings sync via your Chrome profile and apply instantly to open job tabs.
 
@@ -49,6 +50,10 @@ Settings sync via your Chrome profile and apply instantly to open job tabs.
   infinite scroll.
 - `content.css` holds the three visual treatments.
 - `popup.html` / `popup.js` are the settings UI, backed by `chrome.storage.sync`.
+  The popup asks the active tab's content script for a live reposted-job count.
+
+It's purely **visual** — it never clicks, scrolls, or interacts with jobs on
+your behalf, so it doesn't touch how LinkedIn ranks or feeds you listings.
 
 ## Notes / limitations
 

@@ -27,3 +27,33 @@ modeInputs().forEach((input) => {
     if (input.checked) chrome.storage.sync.set({ mode: input.value });
   });
 });
+
+// Ask the active LinkedIn tab how many reposted jobs it found.
+const countNum = document.getElementById("countNum");
+const countText = document.getElementById("countText");
+
+function showCount(n) {
+  countNum.textContent = n;
+  countText.textContent = n === 1 ? "reposted job found on this page" : "reposted jobs found on this page";
+}
+
+function showUnavailable() {
+  countNum.textContent = "–";
+  countText.textContent = "open LinkedIn job search to see results";
+}
+
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  const tab = tabs[0];
+  if (!tab || !tab.url || !/https:\/\/www\.linkedin\.com\/jobs?\//.test(tab.url)) {
+    showUnavailable();
+    return;
+  }
+  chrome.tabs.sendMessage(tab.id, { type: "getRepostCount" }, (res) => {
+    if (chrome.runtime.lastError || !res) {
+      // Content script not loaded yet (tab opened before install / needs refresh).
+      showUnavailable();
+      return;
+    }
+    showCount(res.count);
+  });
+});

@@ -44,13 +44,23 @@ Settings sync via your Chrome profile and apply instantly to open job tabs.
 
 ## How it works (under the hood)
 
-- `content.js` runs on `linkedin.com/jobs/*`, collects job cards via several
-  resilient selectors, and tests each card's text for the word "Reposted".
-- A `MutationObserver` re-applies the filter as new cards stream in during
-  infinite scroll.
+- `inject.js` runs in the page's MAIN world and patches `fetch` /
+  `XMLHttpRequest`. LinkedIn renders the job list from its internal "Voyager"
+  JSON API, and that JSON carries the repost status (a repost flag and/or
+  `originalListedAt` vs `listedAt`) even when the visible card only says
+  "Posted". The interceptor reads those responses and posts the reposted job
+  IDs to the content script via `window.postMessage`.
+- `content.js` collects job cards, reads each card's job ID, and marks it
+  reposted if the API flagged that ID (primary signal) or the card text says
+  "Reposted" (fallback). A `MutationObserver` re-applies the filter as new
+  cards stream in during infinite scroll.
 - `content.css` holds the three visual treatments.
 - `popup.html` / `popup.js` are the settings UI, backed by `chrome.storage.sync`.
   The popup asks the active tab's content script for a live reposted-job count.
+
+This API-based detection is the key trick: the rendered list often hides the
+"Reposted" label (it only appears in the detail pane), but the underlying data
+still contains it — so we read the data, not the pixels.
 
 It's purely **visual** — it never clicks, scrolls, or interacts with jobs on
 your behalf, so it doesn't touch how LinkedIn ranks or feeds you listings.

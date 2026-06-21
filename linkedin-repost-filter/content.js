@@ -43,9 +43,14 @@ const MARK_ATTR = "data-lrf-reposted";
 // it as e.g. "Reposted 3 days ago".
 const REPOST_RE = /\breposted\b/i;
 
+// Job IDs the page-context interceptor (inject.js) flagged as reposted by
+// reading LinkedIn's own API responses. This is the primary, reliable signal.
+const repostedIds = new Set();
+
 // Gather every scrap of text a card carries: visible text plus the hidden
 // labels LinkedIn tucks into aria-label / title / alt attributes (the
-// "Reposted" status sometimes lives only there).
+// "Reposted" status sometimes lives only there). Used as a fallback when the
+// API signal isn't available.
 function getCardText(card) {
   let text = card.textContent || "";
   card.querySelectorAll("[aria-label], [title], img[alt]").forEach((el) => {
@@ -56,7 +61,34 @@ function getCardText(card) {
   return text;
 }
 
+// Pull the numeric job id off a card so we can match it against the API set.
+function cardJobId(card) {
+  let id =
+    card.getAttribute("data-job-id") ||
+    card.getAttribute("data-occludable-job-id");
+  if (id) return String(id);
+
+  const inner = card.querySelector("[data-job-id], [data-occludable-job-id]");
+  if (inner) {
+    id =
+      inner.getAttribute("data-job-id") ||
+      inner.getAttribute("data-occludable-job-id");
+    if (id) return String(id);
+  }
+
+  const link = card.querySelector('a[href*="/jobs/view/"]');
+  if (link) {
+    const m = /\/jobs\/view\/(\d+)/.exec(link.getAttribute("href") || "");
+    if (m) return m[1];
+  }
+  return null;
+}
+
 function isReposted(card) {
+  // Primary signal: LinkedIn's API said this job id is reposted.
+  const id = cardJobId(card);
+  if (id && repostedIds.has(id)) return true;
+  // Fallback: the card's own text/labels mention "Reposted".
   return REPOST_RE.test(getCardText(card));
 }
 
@@ -109,7 +141,8 @@ function scan() {
     const anywhere = REPOST_RE.test(document.body.textContent || "");
     console.debug(
       `[LRF] cards detected: ${cards.size} | reposted matched: ${reposted} | ` +
-        `"Reposted" anywhere on page: ${anywhere} | mode: ${settings.mode} | enabled: ${settings.enabled}`
+        `API reposted IDs: ${repostedIds.size} | "Reposted" text on page: ${anywhere} | ` +
+        `mode: ${settings.mode} | enabled: ${settings.enabled}`
     );
   }
 }
@@ -141,7 +174,32 @@ function startObserver() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
+// Listen for reposted job IDs discovered by the page-context interceptor.
+function listenForApiSignal() {
+  window.addEventListener("message", (e) => {
+    if (e.source !== window) return;
+    const d = e.data;
+    if (!d || d.source !== "LRF_INJECT" || d.type !== "reposted") return;
+    if (!Array.isArray(d.ids)) return;
+
+    let added = false;
+    d.ids.forEach((id) => {
+      const s = String(id);
+      if (!repostedIds.has(s)) {
+        repostedIds.add(s);
+        added = true;
+      }
+    });
+    if (added) scheduleScan();
+  });
+
+  // Ask the interceptor to replay anything it already captured before we loaded.
+  window.postMessage({ source: "LRF_CONTENT", type: "request" }, "*");
+}
+
 function init() {
+  listenForApiSignal();
+
   chrome.storage.sync.get(DEFAULTS, (stored) => {
     settings = { ...DEFAULTS, ...stored };
     scan();

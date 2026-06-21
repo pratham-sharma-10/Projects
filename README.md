@@ -6,3 +6,4 @@ Just shipping and learning and experimenting
 | Project | What it is |
 | --- | --- |
 | [second-brain](./second-brain) | Obsidian-style second brain as an interactive 3D universe — markdown notes as stars, wikilinks as constellations |
+| [linkedin-repost-filter](./linkedin-repost-filter) | Chrome extension that blurs, hides, or greys out "Reposted" jobs in LinkedIn job search |

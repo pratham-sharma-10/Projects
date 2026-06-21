@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reposted Job Filter</title>
+    <style>
+      :root {
+        --li-blue: #0a66c2;
+        --bg: #ffffff;
+        --text: #1d2226;
+        --muted: #56687a;
+        --border: #e0e0e0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        width: 280px;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      header .dot {
+        width: 22px; height: 22px; border-radius: 5px;
+        background: var(--li-blue); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 13px;
+      }
+      header h1 { font-size: 14px; margin: 0; font-weight: 600; }
+      .section { padding: 14px 16px; }
+      .row {
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .row .label { font-size: 13px; font-weight: 600; }
+      .muted { color: var(--muted); font-size: 12px; margin: 2px 0 0; }
+
+      /* Toggle switch */
+      .switch { position: relative; width: 42px; height: 24px; }
+      .switch input { opacity: 0; width: 0; height: 0; }
+      .slider {
+        position: absolute; cursor: pointer; inset: 0;
+        background: #c4cdd5; border-radius: 24px; transition: 0.2s;
+      }
+      .slider::before {
+        content: ""; position: absolute; height: 18px; width: 18px;
+        left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s;
+      }
+      input:checked + .slider { background: var(--li-blue); }
+      input:checked + .slider::before { transform: translateX(18px); }
+
+      .modes { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+      .mode {
+        display: flex; align-items: center; gap: 10px;
+        border: 1px solid var(--border); border-radius: 8px;
+        padding: 10px 12px; cursor: pointer;
+      }
+      .mode:hover { border-color: var(--li-blue); }
+      .mode input { accent-color: var(--li-blue); }
+      .mode .mtext { font-size: 13px; font-weight: 600; }
+      .mode .mdesc { font-size: 11px; color: var(--muted); margin-top: 1px; }
+      .divider { height: 1px; background: var(--border); }
+      footer { padding: 10px 16px 14px; font-size: 11px; color: var(--muted); }
+      .disabled { opacity: 0.5; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="dot">in</span>
+      <h1>Reposted Job Filter</h1>
+    </header>
+
+    <div class="section">
+      <div class="row">
+        <div>
+          <div class="label">Filter reposted jobs</div>
+          <p class="muted">Turn the filter on or off</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="enabled" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" id="modesSection">
+      <div class="label">How to treat reposted jobs</div>
+      <div class="modes">
+        <label class="mode">
+          <input type="radio" name="mode" value="blur" />
+          <div>
+            <div class="mtext">Blur</div>
+            <div class="mdesc">Cover the card so it's unreadable but still there</div>
+          </div>
+        </label>
+        <label class="mode">
+          <input type="radio" name="mode" value="hide" />
+          <div>
+            <div class="mtext">Hide completely</div>
+            <div class="mdesc">Remove reposted jobs from the list entirely</div>
+          </div>
+        </label>
+        <label class="mode">
+          <input type="radio" name="mode" value="dim" />
+          <div>
+            <div class="mtext">Grey out</div>
+            <div class="mdesc">Fade them; hover to reveal</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <footer>Works on LinkedIn job search results. Refresh the page if it was already open.</footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

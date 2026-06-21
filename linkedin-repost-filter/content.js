@@ -21,6 +21,25 @@ const DEBUG = true;
 
 if (DEBUG) console.log("[LRF] content script loaded on", location.href);
 
+// Inject the page-context interceptor (inject.js) into the page's MAIN world
+// the standard, widely-compatible way: a <script> tag pointing at our
+// web-accessible resource. This runs before LinkedIn's own fetch calls and can
+// patch them, which an isolated content script cannot do.
+function injectPageScript() {
+  try {
+    const s = document.createElement("script");
+    s.src = chrome.runtime.getURL("inject.js");
+    s.onload = function () {
+      this.remove();
+    };
+    (document.head || document.documentElement).appendChild(s);
+    if (DEBUG) console.log("[LRF] interceptor script tag injected");
+  } catch (e) {
+    if (DEBUG) console.log("[LRF] failed to inject interceptor:", e);
+  }
+}
+injectPageScript();
+
 // Selectors that have historically matched a single job card / list item.
 // We try several because LinkedIn renames classes often; matching any one of
 // these is enough to grab the card container. Includes the newer "beta"

@@ -43,19 +43,21 @@ const MARK_ATTR = "data-lrf-reposted";
 // it as e.g. "Reposted 3 days ago".
 const REPOST_RE = /\breposted\b/i;
 
-function isReposted(card) {
-  // Use textContent (not innerText) so we also catch the "Reposted" label even
-  // when LinkedIn keeps it as visually-hidden / screen-reader-only text, plus
-  // aria-labels which often spell out "Reposted N days ago".
-  const text = card.textContent || "";
-  if (REPOST_RE.test(text)) return true;
+// Gather every scrap of text a card carries: visible text plus the hidden
+// labels LinkedIn tucks into aria-label / title / alt attributes (the
+// "Reposted" status sometimes lives only there).
+function getCardText(card) {
+  let text = card.textContent || "";
+  card.querySelectorAll("[aria-label], [title], img[alt]").forEach((el) => {
+    text += " " + (el.getAttribute("aria-label") || "");
+    text += " " + (el.getAttribute("title") || "");
+    text += " " + (el.getAttribute("alt") || "");
+  });
+  return text;
+}
 
-  // Some cards expose the status only via aria-label on a child element.
-  const labelled = card.querySelector("[aria-label]");
-  if (labelled && REPOST_RE.test(labelled.getAttribute("aria-label") || "")) {
-    return true;
-  }
-  return false;
+function isReposted(card) {
+  return REPOST_RE.test(getCardText(card));
 }
 
 function applyToCard(card) {

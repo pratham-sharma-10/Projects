@@ -19,6 +19,8 @@ let settings = { ...DEFAULTS };
 // (prefixed with [LRF]). Handy for debugging on LinkedIn UI variants.
 const DEBUG = true;
 
+if (DEBUG) console.log("[LRF] content script loaded on", location.href);
+
 // Selectors that have historically matched a single job card / list item.
 // We try several because LinkedIn renames classes often; matching any one of
 // these is enough to grab the card container. Includes the newer "beta"
@@ -139,7 +141,7 @@ function scan() {
   if (DEBUG) {
     const reposted = document.querySelectorAll(`[${MARK_ATTR}]`).length;
     const anywhere = REPOST_RE.test(document.body.textContent || "");
-    console.debug(
+    console.log(
       `[LRF] cards detected: ${cards.size} | reposted matched: ${reposted} | ` +
         `API reposted IDs: ${repostedIds.size} | "Reposted" text on page: ${anywhere} | ` +
         `mode: ${settings.mode} | enabled: ${settings.enabled}`

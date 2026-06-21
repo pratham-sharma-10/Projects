@@ -16,7 +16,7 @@
   const repostedIds = new Set();
 
   function log(...args) {
-    if (DEBUG) console.debug("[LRF/inject]", ...args);
+    if (DEBUG) console.log("[LRF/inject]", ...args);
   }
 
   function broadcast() {

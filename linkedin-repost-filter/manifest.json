@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "LinkedIn Reposted Job Filter",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Hide, blur, or grey-out reposted jobs in LinkedIn job search so you only see fresh listings.",
   "permissions": ["storage"],
   "host_permissions": ["https://www.linkedin.com/*"],

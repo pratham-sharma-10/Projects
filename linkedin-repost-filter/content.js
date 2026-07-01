@@ -157,14 +157,55 @@ function scan() {
     applyToCard(card);
   });
 
+  const reposted = document.querySelectorAll(`[${MARK_ATTR}]`).length;
+  updateBadge(cards.size, reposted);
+
   if (DEBUG) {
-    const reposted = document.querySelectorAll(`[${MARK_ATTR}]`).length;
     const anywhere = REPOST_RE.test(document.body.textContent || "");
     console.log(
       `[LRF] cards detected: ${cards.size} | reposted matched: ${reposted} | ` +
         `API reposted IDs: ${repostedIds.size} | "Reposted" text on page: ${anywhere} | ` +
         `mode: ${settings.mode} | enabled: ${settings.enabled}`
     );
+  }
+}
+
+// On-page status badge: visible proof the extension is running, no DevTools
+// needed. Shows on job pages; click to dismiss for the rest of the session.
+let badgeDismissed = false;
+function updateBadge(cardCount, repostedCount) {
+  if (badgeDismissed) return;
+
+  // Only surface the badge where it's meaningful: job pages or pages that
+  // actually have job cards.
+  if (!/\/jobs/i.test(location.pathname) && cardCount === 0) {
+    const stale = document.getElementById("lrf-badge");
+    if (stale) stale.remove();
+    return;
+  }
+
+  let badge = document.getElementById("lrf-badge");
+  if (!badge) {
+    badge = document.createElement("div");
+    badge.id = "lrf-badge";
+    badge.title = "LinkedIn Reposted Job Filter — click to dismiss";
+    badge.addEventListener("click", () => {
+      badgeDismissed = true;
+      badge.remove();
+    });
+    document.body.appendChild(badge);
+  }
+
+  if (!settings.enabled) {
+    badge.textContent = "Repost Filter: OFF";
+    badge.className = "lrf-badge-off";
+  } else if (cardCount === 0) {
+    badge.textContent = "Repost Filter: on — no job cards seen on this page";
+    badge.className = "lrf-badge-idle";
+  } else {
+    badge.textContent =
+      `Repost Filter: ${repostedCount} reposted / ${cardCount} jobs (${settings.mode})`;
+    badge.className = repostedCount > 0 ? "lrf-badge-active" : "lrf-badge-idle";
   }
 }
 

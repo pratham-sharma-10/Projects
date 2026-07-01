@@ -58,6 +58,22 @@ document.getElementById("scanBtn").addEventListener("click", () => {
   });
 });
 
+// Wipe remembered reposts (fixes over-filtering) and unblur the current page.
+document.getElementById("resetBtn").addEventListener("click", () => {
+  const btn = document.getElementById("resetBtn");
+  chrome.storage.local.remove(["knownRepostedIdsV2", "knownRepostedIds"]);
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tab = tabs[0];
+    if (tab && tab.id) {
+      chrome.tabs.sendMessage(tab.id, { type: "resetMemory" }, () => {
+        void chrome.runtime.lastError; // tab may not have the script; fine
+      });
+    }
+    btn.textContent = "Memory cleared ✓";
+    setTimeout(() => (btn.textContent = "Reset filter memory"), 1500);
+  });
+});
+
 // One-click diagnostics: ask the page's content script for a full report and
 // put it on the clipboard.
 document.getElementById("diagBtn").addEventListener("click", () => {

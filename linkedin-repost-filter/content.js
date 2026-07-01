@@ -342,7 +342,7 @@ function persistIds() {
   persistTimer = setTimeout(() => {
     persistTimer = null;
     // Cap what we store; oldest ids fall off first.
-    chrome.storage.local.set({ knownRepostedIds: Array.from(repostedIds).slice(-3000) });
+    chrome.storage.local.set({ knownRepostedIdsV2: Array.from(repostedIds).slice(-3000) });
   }, 500);
 }
 
@@ -510,8 +510,8 @@ function init() {
   listenForApiSignal();
 
   // Restore job ids flagged as reposted in earlier sessions.
-  chrome.storage.local.get({ knownRepostedIds: [] }, (stored) => {
-    (stored.knownRepostedIds || []).forEach((id) => repostedIds.add(String(id)));
+  chrome.storage.local.get({ knownRepostedIdsV2: [] }, (stored) => {
+    (stored.knownRepostedIdsV2 || []).forEach((id) => repostedIds.add(String(id)));
     if (DEBUG && repostedIds.size) {
       console.log(`[LRF] restored ${repostedIds.size} remembered reposted job ids`);
     }
@@ -547,6 +547,21 @@ function init() {
     if (msg && msg.type === "startScan") {
       autoScan();
       sendResponse({ started: true });
+    }
+    if (msg && msg.type === "resetMemory") {
+      repostedIds.clear();
+      chrome.storage.local.remove(["knownRepostedIdsV2", "knownRepostedIds"]);
+      try {
+        sessionStorage.removeItem("lrfScannedClean");
+      } catch (e) {
+        /* ignore */
+      }
+      document.querySelectorAll(`[${MARK_ATTR}]`).forEach((card) => {
+        card.removeAttribute(MARK_ATTR);
+        card.classList.remove("lrf-hide", "lrf-blur", "lrf-dim");
+      });
+      scheduleScan();
+      sendResponse({ done: true });
     }
     return true;
   });

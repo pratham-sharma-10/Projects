@@ -41,35 +41,21 @@
     return null;
   }
 
-  // Collect every job id mentioned anywhere inside a value (deep).
-  function collectIds(value, out, depth) {
-    if (depth > 8 || value == null) return;
-    if (typeof value === "string") {
-      const id = idFromUrn(value);
-      if (id) out.add(id);
-      return;
+  // The job id belonging to THIS object only: its own urn-bearing string
+  // fields, nothing nested. A deep sweep here once flagged every job on the
+  // page when a repost signal appeared on a shared wrapper object.
+  function ownId(obj) {
+    for (const k of ["entityUrn", "preDashEntityUrn", "jobPosting", "jobPostingUrn", "trackingUrn", "urn"]) {
+      const id = idFromUrn(obj[k]);
+      if (id) return id;
     }
-    if (typeof value !== "object") return;
-    if (Array.isArray(value)) {
-      for (const v of value) collectIds(v, out, depth + 1);
-      return;
-    }
-    for (const k in value) {
-      // entityUrn / *jobPosting style references often hold the id.
-      const id = idFromUrn(value[k]);
-      if (id) out.add(id);
-      collectIds(value[k], out, depth + 1);
-    }
+    return null;
   }
 
   // Does this object look like a reposted job posting?
   function repostSignal(obj) {
     for (const k in obj) {
-      if (/repost/i.test(k)) {
-        const v = obj[k];
-        if (v === true) return true;
-        if (typeof v === "object" && v && /reposted/i.test(JSON.stringify(v))) return true;
-      }
+      if (/repost/i.test(k) && obj[k] === true) return true;
     }
     // Reposted listings keep the original date — a meaningful gap means repost.
     if (
@@ -95,12 +81,9 @@
       return;
     }
     if (repostSignal(node)) {
-      const ids = new Set();
-      collectIds(node, ids, 0);
-      // Also include this node's own entity urn if it is the posting.
-      const self = idFromUrn(node.entityUrn) || idFromUrn(node.preDashEntityUrn);
-      if (self) ids.add(self);
-      ids.forEach((id) => repostedIds.add(id));
+      // Flag only THIS object's job id — never neighbouring ids.
+      const self = ownId(node);
+      if (self) repostedIds.add(self);
     }
     for (const k in node) walk(node[k], depth + 1);
   }

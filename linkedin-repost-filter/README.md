@@ -4,7 +4,7 @@ A tiny Chrome extension that cleans up your LinkedIn job search by getting rid
 of the **"Reposted"** jobs that clutter the results. Pick how you want them
 handled: **blur** them out, **hide** them completely, or **grey** them out.
 
-![mode: blur / hide / grey](icons/icon128.png)
+![Extension running: reposted jobs blurred, status badge bottom-right](demo.png)
 
 ## What it does
 

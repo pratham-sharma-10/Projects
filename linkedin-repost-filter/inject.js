@@ -12,6 +12,11 @@
  */
 
 (function () {
+  // The interceptor can arrive twice (world:MAIN content script + script-tag
+  // fallback); only the first instance may patch fetch/XHR.
+  if (window.__LRF_INSTALLED) return;
+  window.__LRF_INSTALLED = true;
+
   const DEBUG = true;
   const repostedIds = new Set();
 

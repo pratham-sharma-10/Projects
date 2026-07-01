@@ -26,6 +26,19 @@
   filter: none !important;
 }
 
+/* Banner shown at the top of the job detail pane when the open job is a repost. */
+.lrf-detail-banner {
+  display: block;
+  background: #b24020;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
 /* On-page status badge — visible proof the filter is running. */
 #lrf-badge {
   position: fixed;

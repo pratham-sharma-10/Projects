@@ -113,6 +113,91 @@ function isReposted(card) {
   return REPOST_RE.test(getCardText(card));
 }
 
+// ---------------------------------------------------------------------------
+// Detail-pane detection. The list cards usually say only "Posted", but the
+// detail pane you open by clicking a job spells out "Reposted N hours ago".
+// Whenever that pane is on screen we read it, flag the job, blur its list
+// card, and remember the job id so it stays filtered in future searches.
+// ---------------------------------------------------------------------------
+
+const DETAIL_SELECTORS = [
+  ".job-details-jobs-unified-top-card__container--two-pane",
+  ".jobs-unified-top-card",
+  ".job-details-jobs-unified-top-card",
+  ".jobs-details__main-content",
+  ".jobs-search__job-details",
+  "[class*='job-details']"
+];
+
+// The job currently open in the detail pane, from the URL LinkedIn keeps in
+// sync (?currentJobId=… on search pages, /jobs/view/<id> on full pages).
+function currentJobId() {
+  let m = /[?&]currentJobId=(\d+)/.exec(location.search);
+  if (m) return m[1];
+  m = /\/jobs\/view\/(\d+)/.exec(location.pathname);
+  if (m) return m[1];
+  return null;
+}
+
+function findDetailPane() {
+  for (const sel of DETAIL_SELECTORS) {
+    const el = document.querySelector(sel);
+    if (el) return el;
+  }
+  return null;
+}
+
+function ensureDetailBanner(pane, reposted, jobId) {
+  let banner = document.querySelector(".lrf-detail-banner");
+  if (!reposted) {
+    if (banner) banner.remove();
+    return;
+  }
+  // Re-create when the open job changed so the banner never goes stale.
+  if (banner && banner.getAttribute("data-lrf-job") !== String(jobId)) {
+    banner.remove();
+    banner = null;
+  }
+  if (!banner) {
+    banner = document.createElement("div");
+    banner.className = "lrf-detail-banner";
+    banner.setAttribute("data-lrf-job", String(jobId));
+    banner.textContent = "⚠ Reposted job — flagged by Repost Filter";
+    pane.prepend(banner);
+  }
+}
+
+function scanDetailPane() {
+  const pane = findDetailPane();
+  if (!pane) return;
+  const jobId = currentJobId();
+
+  // Only read the pane's leading text (the top card with title/company/
+  // "Reposted N ago"), not the whole job description, to avoid false hits.
+  const text = (pane.textContent || "").slice(0, 2500);
+  const reposted = REPOST_RE.test(text);
+
+  ensureDetailBanner(pane, reposted, jobId || "unknown");
+
+  if (reposted && jobId && !repostedIds.has(jobId)) {
+    repostedIds.add(jobId);
+    if (DEBUG) console.log(`[LRF] detail pane says job ${jobId} is reposted — remembering it`);
+    persistIds();
+  }
+}
+
+// Remember flagged job ids across pages/sessions so a repost spotted once
+// stays filtered everywhere.
+let persistTimer = null;
+function persistIds() {
+  if (persistTimer) return;
+  persistTimer = setTimeout(() => {
+    persistTimer = null;
+    // Cap what we store; oldest ids fall off first.
+    chrome.storage.local.set({ knownRepostedIds: Array.from(repostedIds).slice(-3000) });
+  }, 500);
+}
+
 function applyToCard(card) {
   if (!isReposted(card)) {
     // Card text may have changed (e.g. re-render) — clear any prior marking.
@@ -151,6 +236,8 @@ function collectCards() {
 }
 
 function scan() {
+  scanDetailPane();
+
   const cards = collectCards();
   cards.forEach((card) => {
     card.setAttribute(PROCESSED_ATTR, "true");
@@ -261,6 +348,15 @@ function listenForApiSignal() {
 
 function init() {
   listenForApiSignal();
+
+  // Restore job ids flagged as reposted in earlier sessions.
+  chrome.storage.local.get({ knownRepostedIds: [] }, (stored) => {
+    (stored.knownRepostedIds || []).forEach((id) => repostedIds.add(String(id)));
+    if (DEBUG && repostedIds.size) {
+      console.log(`[LRF] restored ${repostedIds.size} remembered reposted job ids`);
+    }
+    scheduleScan();
+  });
 
   chrome.storage.sync.get(DEFAULTS, (stored) => {
     settings = { ...DEFAULTS, ...stored };

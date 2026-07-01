@@ -62,6 +62,15 @@ This API-based detection is the key trick: the rendered list often hides the
 "Reposted" label (it only appears in the detail pane), but the underlying data
 still contains it — so we read the data, not the pixels.
 
+### Detail-pane detection & memory
+
+The most reliable signal of all: when you click a job, the detail pane spells
+out "Reposted N hours ago". The extension reads that pane, shows a red
+"⚠ Reposted job" banner on it, blurs/hides the job's card in the list, and
+**remembers the job id** (in `chrome.storage.local`, capped at 3000 ids) — so
+once a repost is spotted it stays filtered in every future search, even where
+the list card only says "Posted".
+
 It's purely **visual** — it never clicks, scrolls, or interacts with jobs on
 your behalf, so it doesn't touch how LinkedIn ranks or feeds you listings.
 

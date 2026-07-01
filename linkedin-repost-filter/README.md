@@ -74,6 +74,18 @@ the list card only says "Posted".
 It's purely **visual** — it never clicks, scrolls, or interacts with jobs on
 your behalf, so it doesn't touch how LinkedIn ranks or feeds you listings.
 
+### One-click page scan
+
+Click **"Scan this page for reposts"** in the popup (or press **Alt+Shift+S**
+on the page). The extension scrolls the list to load every card, then opens
+each job briefly at a human pace (~2s per job, max 40 per run) so the detail
+pane reveals reposts, which get flagged, blurred, and remembered. Progress
+shows in the orange badge; click the badge to stop. Jobs verified clean are
+remembered for the session and never re-opened.
+
+Note: scanning opens each job the way a click does, so scanned jobs are marked
+"Viewed" on your account. It runs only when you trigger it, one page at a time.
+
 ## Notes / limitations
 
 - LinkedIn changes its markup often. The matching is based on the visible

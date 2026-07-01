@@ -58,3 +58,12 @@
 #lrf-badge.lrf-badge-active { background: #057642; }  /* green: filtering */
 #lrf-badge.lrf-badge-idle { background: #0a66c2; }    /* blue: running, nothing to filter */
 #lrf-badge.lrf-badge-off { background: #666; }        /* grey: toggled off */
+#lrf-badge.lrf-badge-scan {                            /* orange: scan in progress */
+  background: #915907;
+  animation: lrf-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes lrf-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}

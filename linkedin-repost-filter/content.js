@@ -54,7 +54,11 @@ const CARD_SELECTORS = [
   "[data-view-name='job-card']",
   "li.jobs-search-results__list-item",
   "div.job-card-list",
-  "li[data-occludable-entity-urn]"
+  "li[data-occludable-entity-urn]",
+  // Selector-free catch: whatever LinkedIn calls its cards, each one is a
+  // list item containing a link to the job. Survives class renames.
+  "li:has(a[href*='currentJobId='])",
+  "li:has(a[href*='/jobs/view/'])"
 ];
 
 const PROCESSED_ATTR = "data-lrf-processed";
@@ -100,6 +104,13 @@ function cardJobId(card) {
   const link = card.querySelector('a[href*="/jobs/view/"]');
   if (link) {
     const m = /\/jobs\/view\/(\d+)/.exec(link.getAttribute("href") || "");
+    if (m) return m[1];
+  }
+
+  // Beta search UI: card links carry ?currentJobId=<id> instead.
+  const betaLink = card.querySelector("a[href*='currentJobId=']");
+  if (betaLink) {
+    const m = /currentJobId=(\d+)/.exec(betaLink.getAttribute("href") || "");
     if (m) return m[1];
   }
   return null;
@@ -220,6 +231,109 @@ function scanDetailPane() {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Auto-scan: user-triggered. Scrolls the list to load every card, then opens
+// each job briefly (like a human clicking through) so the detail pane reveals
+// "Reposted" and the job gets flagged + blurred. Human-paced on purpose:
+// one page per run, ~2s per job, cancellable by clicking the badge.
+// ---------------------------------------------------------------------------
+
+let scanState = null; // null | { i, n } while a scan runs
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+function findListScroller() {
+  const first = collectCards().values().next().value;
+  for (let el = first; el && el !== document.body; el = el.parentElement) {
+    if (el.scrollHeight > el.clientHeight + 100) return el;
+  }
+  return document.scrollingElement || document.documentElement;
+}
+
+async function autoScrollList() {
+  const scroller = findListScroller();
+  for (let i = 0; i < 25 && scanState; i++) {
+    const before = scroller.scrollTop;
+    scroller.scrollTop = scroller.scrollHeight;
+    await sleep(700);
+    if (Math.abs(scroller.scrollTop - before) < 4) break; // bottom reached
+  }
+  scroller.scrollTop = 0;
+  await sleep(400);
+}
+
+function openCard(card) {
+  card.scrollIntoView({ block: "center" });
+  const link = card.querySelector(
+    "a[href*='currentJobId='], a[href*='/jobs/view/']"
+  );
+  (link || card).click();
+}
+
+async function autoScan() {
+  if (scanState) return;
+  scanState = { i: 0, n: 0 };
+  if (DEBUG) console.log("[LRF] auto-scan started");
+  try {
+    await autoScrollList();
+
+    // Jobs already checked and found clean this session — never re-click them
+    // if the scan is re-run or the page reloads mid-scan.
+    let scannedClean;
+    try {
+      scannedClean = new Set(JSON.parse(sessionStorage.getItem("lrfScannedClean") || "[]"));
+    } catch (e) {
+      scannedClean = new Set();
+    }
+
+    // Build the queue: one entry per unique job id, skipping known reposts
+    // and jobs already verified clean.
+    const seen = new Set();
+    const queue = [];
+    collectCards().forEach((card) => {
+      const id = cardJobId(card);
+      if (!id || seen.has(id)) return;
+      seen.add(id);
+      if (repostedIds.has(id) || scannedClean.has(id)) return;
+      queue.push({ card, id });
+    });
+
+    const max = Math.min(queue.length, 40); // one page per run, capped
+    scanState.n = max;
+
+    for (let i = 0; i < max; i++) {
+      if (!scanState) return; // cancelled via badge click
+      scanState.i = i + 1;
+      updateBadge(seen.size, document.querySelectorAll(`[${MARK_ATTR}]`).length);
+      openCard(queue[i].card);
+      // Human-ish pacing; also gives LinkedIn time to render the pane.
+      await sleep(1500 + Math.random() * 900);
+      scanDetailPane();
+      scan();
+      if (!repostedIds.has(queue[i].id)) {
+        scannedClean.add(queue[i].id);
+        try {
+          sessionStorage.setItem("lrfScannedClean", JSON.stringify(Array.from(scannedClean)));
+        } catch (e) {
+          /* storage full/blocked — worst case we re-check next run */
+        }
+      }
+    }
+    if (DEBUG) console.log(`[LRF] auto-scan finished: ${repostedIds.size} known reposts`);
+  } finally {
+    scanState = null;
+    scheduleScan();
+  }
+}
+
+function cancelScan() {
+  if (!scanState) return;
+  scanState = null;
+  if (DEBUG) console.log("[LRF] auto-scan cancelled");
+}
+
 // Remember flagged job ids across pages/sessions so a repost spotted once
 // stays filtered everywhere.
 let persistTimer = null;
@@ -309,12 +423,24 @@ function updateBadge(cardCount, repostedCount) {
   if (!badge) {
     badge = document.createElement("div");
     badge.id = "lrf-badge";
-    badge.title = "LinkedIn Reposted Job Filter — click to dismiss";
+    badge.title = "LinkedIn Reposted Job Filter — click to dismiss (or to stop a scan)";
     badge.addEventListener("click", () => {
+      if (scanState) {
+        cancelScan();
+        return;
+      }
       badgeDismissed = true;
       badge.remove();
     });
     document.body.appendChild(badge);
+  }
+
+  if (scanState) {
+    badge.textContent = scanState.n
+      ? `Scanning job ${scanState.i}/${scanState.n}… (click to stop)`
+      : "Scanning: loading all jobs… (click to stop)";
+    badge.className = "lrf-badge-scan";
+    return;
   }
 
   if (!settings.enabled) {
@@ -418,7 +544,16 @@ function init() {
       scan();
       sendResponse({ report: buildDiagnostics() });
     }
+    if (msg && msg.type === "startScan") {
+      autoScan();
+      sendResponse({ started: true });
+    }
     return true;
+  });
+
+  // Keyboard shortcut: Alt+Shift+S starts a scan of the current page.
+  document.addEventListener("keydown", (e) => {
+    if (e.altKey && e.shiftKey && e.code === "KeyS") autoScan();
   });
 }
 

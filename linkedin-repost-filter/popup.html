@@ -80,6 +80,12 @@
         font-size: 13px; font-weight: 600; cursor: pointer;
       }
       .diag-btn:hover { background: #eef3f8; }
+      .scan-btn {
+        width: 100%; padding: 10px 12px; border-radius: 8px;
+        border: none; background: var(--li-blue); color: #fff;
+        font-size: 13px; font-weight: 600; cursor: pointer;
+      }
+      .scan-btn:hover { background: #084d92; }
     </style>
   </head>
   <body>
@@ -132,6 +138,15 @@
           </div>
         </label>
       </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <button id="scanBtn" class="scan-btn">🔍 Scan this page for reposts</button>
+      <p class="muted">Auto-opens each job (~2s each, like you would) so hidden
+      reposts get flagged and blurred. Marks them as Viewed. Click the orange
+      badge on the page to stop.</p>
     </div>
 
     <div class="divider"></div>

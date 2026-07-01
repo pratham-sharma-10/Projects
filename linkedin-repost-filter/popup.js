@@ -46,6 +46,18 @@ function showUnavailable() {
 document.getElementById("versionLine").textContent =
   `v${chrome.runtime.getManifest().version} — works on LinkedIn job search. Refresh the page if it was already open.`;
 
+// Kick off an auto-scan of the current page; progress shows in the on-page badge.
+document.getElementById("scanBtn").addEventListener("click", () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tab = tabs[0];
+    if (!tab || !tab.id) return;
+    chrome.tabs.sendMessage(tab.id, { type: "startScan" }, () => {
+      if (chrome.runtime.lastError) return; // not a LinkedIn tab / needs refresh
+      window.close(); // get out of the way; the badge shows progress
+    });
+  });
+});
+
 // One-click diagnostics: ask the page's content script for a full report and
 // put it on the clipboard.
 document.getElementById("diagBtn").addEventListener("click", () => {

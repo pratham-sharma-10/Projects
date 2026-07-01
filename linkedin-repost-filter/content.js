@@ -167,17 +167,51 @@ function ensureDetailBanner(pane, reposted, jobId) {
   }
 }
 
+// Selector-free fallback: find an element whose text says "Reposted" that is
+// NOT inside a job-list card (so it must be the detail pane), regardless of
+// what LinkedIn calls its classes this week.
+function repostedElementOutsideCards() {
+  if (!REPOST_RE.test(document.body.textContent || "")) return null;
+  const cardSel = CARD_SELECTORS.join(",");
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (!REPOST_RE.test(node.nodeValue || "")) continue;
+    const el = node.parentElement;
+    if (!el) continue;
+    if (el.closest(cardSel)) continue; // it's a list card, not the pane
+    if (el.closest("#lrf-badge, .lrf-detail-banner")) continue; // our own UI
+    return el;
+  }
+  return null;
+}
+
 function scanDetailPane() {
-  const pane = findDetailPane();
-  if (!pane) return;
   const jobId = currentJobId();
+  const pane = findDetailPane();
+  let reposted = false;
+  let anchor = null; // where to show the banner
 
-  // Only read the pane's leading text (the top card with title/company/
-  // "Reposted N ago"), not the whole job description, to avoid false hits.
-  const text = (pane.textContent || "").slice(0, 2500);
-  const reposted = REPOST_RE.test(text);
+  if (pane) {
+    // Only read the pane's leading text (the top card with title/company/
+    // "Reposted N ago"), not the whole job description, to avoid false hits.
+    reposted = REPOST_RE.test((pane.textContent || "").slice(0, 2500));
+    anchor = pane;
+  }
 
-  ensureDetailBanner(pane, reposted, jobId || "unknown");
+  if (!reposted) {
+    // Class names change with LinkedIn redesigns — fall back to finding the
+    // "Reposted" text itself anywhere outside the job list.
+    const el = repostedElementOutsideCards();
+    if (el) {
+      reposted = true;
+      anchor = el.parentElement || el;
+    }
+  }
+
+  if (anchor || !reposted) {
+    ensureDetailBanner(anchor, reposted, jobId || "unknown");
+  }
 
   if (reposted && jobId && !repostedIds.has(jobId)) {
     repostedIds.add(jobId);
@@ -380,8 +414,53 @@ function init() {
       scan();
       sendResponse({ count: document.querySelectorAll(`[${MARK_ATTR}]`).length });
     }
+    if (msg && msg.type === "getDiagnostics") {
+      scan();
+      sendResponse({ report: buildDiagnostics() });
+    }
     return true;
   });
+}
+
+// One-click diagnostic report so problems can be debugged from a paste
+// instead of a screenshot safari.
+function buildDiagnostics() {
+  const lines = [];
+  lines.push("=== LinkedIn Reposted Job Filter — diagnostics ===");
+  lines.push(`version: ${chrome.runtime.getManifest().version}`);
+  lines.push(`url: ${location.href}`);
+  lines.push(`settings: enabled=${settings.enabled} mode=${settings.mode}`);
+  lines.push(`remembered/API reposted ids: ${repostedIds.size}`);
+
+  lines.push("--- card selector hits ---");
+  let sampleCard = null;
+  for (const sel of CARD_SELECTORS) {
+    const n = document.querySelectorAll(sel).length;
+    lines.push(`${sel}: ${n}`);
+    if (n && !sampleCard) sampleCard = document.querySelector(sel);
+  }
+  const marked = document.querySelectorAll(`[${MARK_ATTR}]`).length;
+  lines.push(`marked as reposted: ${marked}`);
+  lines.push(`"Reposted" text anywhere on page: ${REPOST_RE.test(document.body.textContent || "")}`);
+
+  lines.push("--- detail pane ---");
+  let paneSel = null;
+  for (const sel of DETAIL_SELECTORS) {
+    if (document.querySelector(sel)) { paneSel = sel; break; }
+  }
+  lines.push(`matched selector: ${paneSel || "NONE"}`);
+  if (paneSel) {
+    const t = (document.querySelector(paneSel).textContent || "").replace(/\s+/g, " ").slice(0, 300);
+    lines.push(`pane text (300ch): ${t}`);
+  }
+  lines.push(`currentJobId: ${currentJobId() || "none"}`);
+  lines.push(`banner present: ${!!document.querySelector(".lrf-detail-banner")}`);
+  lines.push(`badge present: ${!!document.getElementById("lrf-badge")}`);
+
+  lines.push("--- sample card HTML (1200ch) ---");
+  lines.push(sampleCard ? sampleCard.outerHTML.replace(/\s+/g, " ").slice(0, 1200) : "NO CARDS FOUND");
+  lines.push("=== end ===");
+  return lines.join("\n");
 }
 
 if (document.body) {

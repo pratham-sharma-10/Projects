@@ -42,6 +42,36 @@ function showUnavailable() {
   countText.textContent = "open LinkedIn job search to see results";
 }
 
+// Show the running version so stale installs are immediately obvious.
+document.getElementById("versionLine").textContent =
+  `v${chrome.runtime.getManifest().version} — works on LinkedIn job search. Refresh the page if it was already open.`;
+
+// One-click diagnostics: ask the page's content script for a full report and
+// put it on the clipboard.
+document.getElementById("diagBtn").addEventListener("click", () => {
+  const status = document.getElementById("diagStatus");
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tab = tabs[0];
+    const fallback =
+      `=== LRF diagnostics (popup only) ===\n` +
+      `popup version: ${chrome.runtime.getManifest().version}\n` +
+      `tab url: ${tab && tab.url}\n` +
+      `content script: NOT RESPONDING (page needs a refresh, or not a LinkedIn tab)\n` +
+      `=== end ===`;
+    if (!tab || !tab.id) {
+      navigator.clipboard.writeText(fallback);
+      status.textContent = "Copied (no tab info). Paste it in the chat.";
+      return;
+    }
+    chrome.tabs.sendMessage(tab.id, { type: "getDiagnostics" }, (res) => {
+      const text = chrome.runtime.lastError || !res ? fallback : res.report;
+      navigator.clipboard.writeText(text).then(() => {
+        status.textContent = "Copied! Paste it in the chat.";
+      });
+    });
+  });
+});
+
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const tab = tabs[0];
   if (!tab || !tab.url || !/https:\/\/www\.linkedin\.com\//.test(tab.url)) {

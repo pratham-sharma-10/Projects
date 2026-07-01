@@ -74,6 +74,12 @@
       }
       .count .num { font-size: 20px; font-weight: 700; color: var(--li-blue); min-width: 18px; }
       .count .ctext { font-size: 12px; color: var(--muted); }
+      .diag-btn {
+        width: 100%; padding: 8px 12px; border-radius: 8px;
+        border: 1px solid var(--li-blue); background: #fff; color: var(--li-blue);
+        font-size: 13px; font-weight: 600; cursor: pointer;
+      }
+      .diag-btn:hover { background: #eef3f8; }
     </style>
   </head>
   <body>
@@ -128,7 +134,14 @@
       </div>
     </div>
 
-    <footer>Works on LinkedIn job search results. Refresh the page if it was already open.</footer>
+    <div class="divider"></div>
+
+    <div class="section">
+      <button id="diagBtn" class="diag-btn">Copy diagnostics</button>
+      <p class="muted" id="diagStatus">If something looks broken, click this and paste the result when asking for help.</p>
+    </div>
+
+    <footer id="versionLine">Works on LinkedIn job search results. Refresh the page if it was already open.</footer>
 
     <script src="popup.js"></script>
   </body>

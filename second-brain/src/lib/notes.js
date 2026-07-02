@@ -2,7 +2,8 @@
 //
 // Every .md file under notes/ becomes a node. The folder it lives in is its
 // "constellation" (cluster). [[Wikilinks]] between notes become edges.
-// Files are pulled in at build time, so adding a note is just adding a file.
+// Files are pulled in at build time; notes captured in the browser are
+// layered on top by the store (see store.js) and rebuilt into the same graph.
 
 const files = import.meta.glob('../../notes/**/*.md', {
   query: '?raw',
@@ -26,7 +27,7 @@ export function slugify(text) {
 
 // Minimal YAML-ish frontmatter parser. Supports `key: value`,
 // inline lists `[a, b]` and block lists (`- item`). Keep frontmatter simple.
-function parseFrontmatter(raw) {
+export function parseFrontmatter(raw) {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/)
   if (!match) return { meta: {}, body: raw }
 
@@ -69,7 +70,7 @@ function extractWikilinks(body) {
   return targets
 }
 
-function makeExcerpt(body, length = 170) {
+export function makeExcerpt(body, length = 170) {
   const text = body
     .replace(WIKILINK_RE, (_, target, alias) => alias || target)
     .replace(/^#+\s.*$/gm, '')
@@ -81,9 +82,24 @@ function makeExcerpt(body, length = 170) {
   return text.length > length ? text.slice(0, length).trimEnd() + '…' : text
 }
 
-function buildVault() {
-  const notes = []
+// Build a note object from its parts. `local` marks notes captured in the
+// browser (stored in localStorage) rather than committed to the repo.
+export function makeNote({ id, title, folder, meta = {}, body, local = false }) {
+  return {
+    id,
+    title,
+    constellation: slugify(meta.constellation || folder),
+    tags: Array.isArray(meta.tags) ? meta.tags : meta.tags ? [meta.tags] : [],
+    created: meta.created || null,
+    body,
+    excerpt: makeExcerpt(body),
+    rawLinks: extractWikilinks(body),
+    local,
+  }
+}
 
+function repoNotes() {
+  const notes = []
   for (const [path, raw] of Object.entries(files)) {
     // path looks like ../../notes/<constellation>/<file>.md
     const rel = path.replace(/^.*?\/notes\//, '')
@@ -94,16 +110,21 @@ function buildVault() {
     const { meta, body } = parseFrontmatter(raw)
     const title = meta.title || fileName.replace(/[-_]/g, ' ')
 
-    notes.push({
-      id: slugify(fileName),
-      title,
-      constellation: slugify(meta.constellation || folder),
-      tags: Array.isArray(meta.tags) ? meta.tags : meta.tags ? [meta.tags] : [],
-      created: meta.created || null,
-      body,
-      excerpt: makeExcerpt(body),
-      rawLinks: extractWikilinks(body),
-    })
+    notes.push(makeNote({ id: slugify(fileName), title, folder, meta, body }))
+  }
+  return notes
+}
+
+export function buildVault(localNotes = []) {
+  const notes = [...repoNotes()]
+
+  // Local notes layer on top; a local note never shadows a repo note's id.
+  const taken = new Set(notes.map((n) => n.id))
+  for (const note of localNotes) {
+    let id = note.id
+    while (taken.has(id)) id = `${id}-1`
+    taken.add(id)
+    notes.push({ ...note, id })
   }
 
   // Wikilinks may point at a note's title or its filename — index both.
@@ -116,12 +137,11 @@ function buildVault() {
   for (const note of notes) {
     note.links = []
     note.unresolved = []
-    for (const target of note.rawLinks) {
+    for (const target of note.rawLinks || []) {
       const id = idIndex.get(slugify(target))
       if (id && id !== note.id && !note.links.includes(id)) note.links.push(id)
       else if (!id) note.unresolved.push(target)
     }
-    delete note.rawLinks
   }
 
   const notesById = new Map(notes.map((n) => [n.id, n]))
@@ -168,9 +188,7 @@ function buildVault() {
   return { notes, notesById, constellations, graphData: { nodes, links } }
 }
 
-export const vault = buildVault()
-
-export function searchNotes(query, limit = 8) {
+export function searchNotes(vault, query, limit = 8) {
   const q = query.trim().toLowerCase()
   if (!q) return []
   const scored = []

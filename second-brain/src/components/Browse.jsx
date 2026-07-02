@@ -1,6 +1,4 @@
-import { vault } from '../lib/notes.js'
-
-export default function Browse({ onSelect }) {
+export default function Browse({ vault, onSelect }) {
   return (
     <div className="browse">
       {vault.constellations.map((c) => (
@@ -16,7 +14,10 @@ export default function Browse({ onSelect }) {
               .sort((a, b) => a.title.localeCompare(b.title))
               .map((n) => (
                 <button key={n.id} className="card" onClick={() => onSelect(n.id)}>
-                  <h3>{n.title}</h3>
+                  <h3>
+                    {n.title}
+                    {n.local && <span className="local-dot" title="local note — only in this browser" />}
+                  </h3>
                   <p>{n.excerpt}</p>
                   <div className="card-tags">
                     {n.tags.map((t) => (

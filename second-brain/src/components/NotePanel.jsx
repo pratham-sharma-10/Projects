@@ -1,34 +1,10 @@
 import { useMemo } from 'react'
-import { marked } from 'marked'
-import { vault, slugify } from '../lib/notes.js'
+import { renderMarkdown } from '../lib/markdown.js'
+import { deleteLocalNote, exportLocalNote } from '../lib/store.js'
 
-const WIKILINK_RE = /\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]+))?\]\]/g
-
-// Split body into [text, code, text, code, ...] so wikilinks inside
-// fenced blocks or inline code are left untouched.
-const CODE_SPLIT_RE = /(```[\s\S]*?```|`[^`\n]*`)/g
-
-function renderMarkdown(note) {
-  // Resolve [[wikilinks]] to in-app anchors before handing off to marked.
-  const withLinks = note.body
-    .split(CODE_SPLIT_RE)
-    .map((segment, i) => {
-      if (i % 2 === 1) return segment
-      return segment.replace(WIKILINK_RE, (_, target, alias) => {
-        const label = alias || target.trim()
-        const id = slugify(target.trim())
-        return vault.notesById.has(id)
-          ? `<a class="wikilink" data-note="${id}">${label}</a>`
-          : `<span class="wikilink broken" title="No note named “${target.trim()}” yet">${label}</span>`
-      })
-    })
-    .join('')
-  return marked.parse(withLinks)
-}
-
-export default function NotePanel({ noteId, onNavigate, onClose }) {
+export default function NotePanel({ vault, noteId, onNavigate, onClose }) {
   const note = vault.notesById.get(noteId)
-  const html = useMemo(() => (note ? renderMarkdown(note) : ''), [note])
+  const html = useMemo(() => (note ? renderMarkdown(note.body, vault) : ''), [note, vault])
   if (!note) return null
 
   const color = vault.constellations.find((c) => c.name === note.constellation)?.color
@@ -41,19 +17,51 @@ export default function NotePanel({ noteId, onNavigate, onClose }) {
     }
   }
 
+  function download() {
+    const file = exportLocalNote(note.sourceKey)
+    if (!file) return
+    const blob = new Blob([file.raw], { type: 'text/markdown' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = file.filename
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  function remove() {
+    if (confirm(`Delete “${note.title}” from this browser?`)) {
+      deleteLocalNote(note.sourceKey)
+      onClose()
+    }
+  }
+
   return (
     <aside className="note-panel" onClick={handleClick}>
       <header className="note-panel-head">
         <span className="chip" style={{ color, borderColor: color }}>
           {note.constellation}
         </span>
-        <button className="close-btn" onClick={onClose} aria-label="Close note">
-          ✕
-        </button>
+        <span className="note-panel-actions">
+          {note.local && (
+            <>
+              <button className="close-btn" title="Download as markdown to commit into notes/" onClick={download}>
+                ⤓
+              </button>
+              <button className="close-btn" title="Delete from this browser" onClick={remove}>
+                🗑
+              </button>
+            </>
+          )}
+          <button className="close-btn" onClick={onClose} aria-label="Close note">
+            ✕
+          </button>
+        </span>
       </header>
 
       <h1 className="note-title">{note.title}</h1>
       <div className="note-meta">
+        {note.local && <span className="meta-item local-badge">● local — only in this browser</span>}
         {note.created && <span className="meta-item">{note.created}</span>}
         {note.tags.map((t) => (
           <span key={t} className="meta-item tag">

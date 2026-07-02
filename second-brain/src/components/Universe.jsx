@@ -3,10 +3,9 @@ import ForceGraph3D from 'react-force-graph-3d'
 import SpriteText from 'three-spritetext'
 import * as THREE from 'three'
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
-import { vault } from '../lib/notes.js'
 import { buildGalaxy, makeStarNode } from '../lib/galaxy.js'
 
-export default function Universe({ selectedId, onSelect }) {
+export default function Universe({ vault, selectedId, onSelect }) {
   const fgRef = useRef()
   const containerRef = useRef()
 
@@ -50,7 +49,7 @@ export default function Universe({ selectedId, onSelect }) {
     if (!selectedId) return
     const node = vault.graphData.nodes.find((n) => n.id === selectedId)
     if (node && node.x !== undefined) flyTo(node)
-  }, [selectedId])
+  }, [selectedId, vault])
 
   function flyTo(node) {
     const dist = Math.hypot(node.x, node.y, node.z) || 1

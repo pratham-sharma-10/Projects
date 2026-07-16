@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'second-brain/**'
+      - 'pollak-immigration-hub/**'
       - '.github/workflows/deploy-second-brain.yml'
   workflow_dispatch:
 
@@ -32,6 +33,10 @@ jobs:
           cache-dependency-path: second-brain/package-lock.json
       - run: npm ci
       - run: npm run build
+      - name: Add Pollak prototype at /pollak
+        run: |
+          mkdir -p dist/pollak
+          cp -r ../pollak-immigration-hub/. dist/pollak/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: second-brain/dist

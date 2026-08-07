@@ -1,0 +1,357 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  ============================================================================
+  ALIA BRAND TOKENS — SINGLE SOURCE OF TRUTH
+  ============================================================================
+  Every color, shadow, and radius in the app resolves to one of these
+  variables (wired into Tailwind in tailwind.config.js). To re-skin the whole
+  prototype to Alia's exact brand, correct the hex values here and nowhere
+  else.
+
+  These values are a *safe starting direction* derived from Alia's marketing
+  site (clean off-white surfaces, near-black ink, a single confident accent).
+  The live site (aliapopups.com) and Shopify listing were unreachable from the
+  build sandbox's network egress proxy, so exact hexes could not be sampled.
+  Alia's own popup editor exposes Text / Background / Accent / Accent-Foreground
+  slots — these variables mirror that model so a correction is a 4-line edit.
+  ============================================================================
+*/
+:root {
+  /* Surfaces */
+  --alia-bg: #f6f7f9; /* app canvas — soft off-white */
+  --alia-surface: #ffffff; /* cards / panels */
+  --alia-surface-2: #f1f3f6; /* insets, code, subtle fills */
+
+  /* Ink */
+  --alia-ink: #12141a; /* near-black primary text */
+  --alia-ink-soft: #3d424d; /* secondary text */
+  --alia-ink-muted: #6b7280; /* tertiary / captions */
+
+  /* Accent (reserved for primary actions + score) */
+  --alia-accent: #4f46e5; /* confident indigo */
+  --alia-accent-hover: #4338ca;
+  --alia-accent-fg: #ffffff; /* text/icon on accent */
+
+  /* Borders / dividers (soft — we lean on shadow, not heavy rules) */
+  --alia-border: #e6e8ec;
+  --alia-border-strong: #d3d7de;
+
+  /* Status palette — WCAG-AA against white surfaces */
+  --alia-pass: #067647;
+  --alia-pass-bg: #e7f6ee;
+  --alia-warn: #9a6700;
+  --alia-warn-bg: #fdf3d6;
+  --alia-fail: #b42318;
+  --alia-fail-bg: #fdeceb;
+
+  /* Elevation + radius */
+  --alia-shadow-card: 0 1px 2px rgba(16, 20, 32, 0.04), 0 4px 16px rgba(16, 20, 32, 0.06);
+  --alia-shadow-pop: 0 12px 40px rgba(16, 20, 32, 0.18), 0 2px 8px rgba(16, 20, 32, 0.12);
+
+  color-scheme: light;
+}
+
+html {
+  font-family: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background: var(--alia-bg);
+  color: var(--alia-ink);
+}
+
+/* Respect reduced-motion: a tool that preaches accessibility must practice it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- App-wide focus visibility (the Guardrail's own UI must be exemplary) --- */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--alia-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Utility: screen-reader-only text (used in the app chrome, not the fixtures) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Subtle entrance used by panels — restrained, ~200ms. */
+@keyframes alia-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.alia-fade-up {
+  animation: alia-fade-up 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/*
+  ============================================================================
+  STOREFRONT / POPUP FIXTURE STYLES
+  ============================================================================
+  These classes style the *audited artifact* (the simulated Alia popup), NOT
+  the Guardrail chrome. The `.is-broken` / `.is-remediated` variants are what
+  the audit engine measures for real — the broken variant deliberately removes
+  focus indicators and uses sub-threshold contrast so the checks genuinely
+  FAIL. Do not "fix" the broken styles; they are the point of the demo.
+  ============================================================================
+*/
+
+/* The popup shell */
+.fx-dialog {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: var(--alia-shadow-pop);
+}
+
+/* Focus indicators inside the popup fixture ------------------------------- */
+
+/* Remediated: strong, visible focus ring on every focusable (WCAG 2.4.7). */
+.fx-remediated :where(button, input, a, [tabindex]):focus-visible,
+.fx-remediated :where(button, input, a, [tabindex]):focus {
+  outline: 3px solid var(--alia-accent);
+  outline-offset: 2px;
+}
+
+/* Broken: focus indicator suppressed — the classic accessibility failure. */
+.fx-broken :where(button, input, a, [tabindex]):focus,
+.fx-broken :where(button, input, a, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Text contrast tokens for the fixtures --------------------------------- */
+/* Remediated body copy — passes 4.5:1 on white. */
+.fx-remediated .fx-muted {
+  color: #4b5563;
+}
+/* Broken body copy — ~2.3:1 on white, fails WCAG 1.4.3. */
+.fx-broken .fx-muted {
+  color: #c3c9d4;
+}
+
+/* Remediated primary button — accessible contrast. */
+.fx-remediated .fx-cta {
+  background: #4f46e5;
+  color: #ffffff;
+}
+.fx-remediated .fx-cta:hover {
+  background: #4338ca;
+}
+/* Broken primary button — pale accent, ~1.9:1 text contrast, fails 1.4.3. */
+.fx-broken .fx-cta {
+  background: #c7c9f5;
+  color: #ffffff;
+}
+
+/* Highlight ring used by the keyboard walkthrough HUD to mark live focus. */
+.walkthrough-active :where(button, input, a, [tabindex]):focus {
+  outline: 3px dashed var(--alia-accent) !important;
+  outline-offset: 3px;
+}
+
+/* --- Popup layout (shared by both builds) ------------------------------- */
+.fx-scrim {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(16, 20, 32, 0.42);
+  z-index: 20;
+  animation: alia-fade-up 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fx-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 384px;
+  padding: 28px 26px 24px;
+  text-align: left;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.fx-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  line-height: 1;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.fx-remediated .fx-close:hover {
+  background: #f1f3f6;
+  color: #12141a;
+}
+/* Broken close is a div; give it a cursor but it's not keyboard reachable. */
+.fx-broken .fx-close {
+  cursor: pointer;
+}
+
+.fx-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.fx-heading {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #12141a;
+  margin: 0 0 8px;
+}
+
+.fx-body {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+
+/* Quiz group */
+.fx-quiz {
+  border: none;
+  margin: 0 0 18px;
+  padding: 0;
+}
+.fx-quiz-q {
+  font-size: 13px;
+  font-weight: 600;
+  color: #12141a;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.fx-quiz-opts {
+  display: grid;
+  gap: 8px;
+}
+.fx-quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #12141a;
+  padding: 10px 12px;
+  border: 1px solid var(--alia-border-strong);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.fx-remediated .fx-quiz-opt:hover {
+  border-color: var(--alia-accent);
+}
+.fx-quiz-opt input[type='radio'] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--alia-accent);
+}
+/* Faux radio for the broken build — looks like a control, has no semantics. */
+.fx-fauxradio {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--alia-border-strong);
+  flex: none;
+}
+
+/* Email field */
+.fx-field {
+  margin-bottom: 14px;
+}
+.fx-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #12141a;
+  margin-bottom: 6px;
+}
+.fx-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  font-size: 14px;
+  color: #12141a;
+  background: #ffffff;
+  border: 1px solid var(--alia-border-strong);
+  border-radius: 10px;
+}
+.fx-remediated .fx-input:focus {
+  border-color: var(--alia-accent);
+}
+.fx-input::placeholder {
+  color: #9aa1ad;
+}
+
+/* Buttons */
+.fx-cta {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.fx-decline {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  text-align: center;
+  font-size: 13px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.fx-remediated .fx-decline {
+  color: #4b5563;
+}
+.fx-remediated .fx-decline:hover {
+  color: #12141a;
+  text-decoration: underline;
+}
+/* Broken decline — low-contrast div. */
+.fx-broken .fx-decline {
+  color: #c3c9d4;
+}

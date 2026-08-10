@@ -1,4 +1,4 @@
-// A pragmatic accessible-name computation — a small, honest subset of the
+// A pragmatic accessible-name computation, a small, honest subset of the
 // W3C "Accessible Name and Description Computation". Enough to model how a
 // screen reader would name the controls in our fixtures (aria-labelledby →
 // aria-label → associated <label> → text/alt), not a full implementation.

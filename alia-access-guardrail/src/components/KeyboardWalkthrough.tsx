@@ -28,7 +28,7 @@ function describe(el: Element): { name: string; role: string } {
 
 /**
  * Live keyboard-walkthrough HUD. While active it tracks the real focused
- * element and shows — for a non-technical viewer — whether focus is safely
+ * element and shows, for a non-technical viewer, whether focus is safely
  * inside the dialog or has escaped to the page behind it.
  */
 export default function KeyboardWalkthrough({ active, dialogNode, isOpen }: Props) {
@@ -105,18 +105,18 @@ export default function KeyboardWalkthrough({ active, dialogNode, isOpen }: Prop
       >
         {escaped ? (
           <p className="text-[13px] font-semibold text-alia-fail">
-            ⚠ Focus escaped the dialog — a keyboard user is now lost on the page behind the popup.
+            Focus escaped the dialog. Focus is now on the page behind the popup.
           </p>
         ) : focus ? (
           <p className="text-[13px] text-alia-ink">
-            <span className="font-semibold text-alia-pass">Focus trapped ✓</span>{' '}
-            <span className="text-alia-ink-soft">now on:</span>{' '}
+            <span className="font-semibold text-alia-pass">Focus contained.</span>{' '}
+            <span className="text-alia-ink-soft">Current control:</span>{' '}
             <span className="font-semibold">{focus.name}</span>{' '}
             <span className="text-alia-ink-muted">({focus.role})</span>
           </p>
         ) : (
           <p className="text-[13px] text-alia-ink-muted">
-            Waiting for focus — click a control inside the popup to begin.
+            Waiting for focus. Click a control inside the popup to begin.
           </p>
         )}
       </div>

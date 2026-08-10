@@ -16,7 +16,7 @@ const KIND_PREFIX: Record<SRLine['kind'], string> = {
 
 /**
  * Renders the generated screen-reader transcript as a "speech" panel. Purely
- * visual (a sighted-audience aid) — the real accessible names come from the
+ * visual (a sighted-audience aid), the real accessible names come from the
  * live DOM via buildScreenReaderScript.
  */
 export default function ScreenReaderPreview({ lines }: { lines: SRLine[] }) {

@@ -4,7 +4,7 @@ import { getFocusable, isWithin } from './dom';
 import { accessibleName } from './a11yName';
 
 // ---------------------------------------------------------------------------
-// Interactive checks — the behavioral criteria a static engine like axe-core
+// Interactive checks, the behavioral criteria a static engine like axe-core
 // cannot verify on its own. Each probe drives the REAL popup DOM (dispatches
 // real keyboard events, moves real focus, reads real computed styles) and
 // restores state afterward so the visible demo is undisturbed.
@@ -41,7 +41,7 @@ const checkDialogSemantics: Probe = (node) => {
       ...meta,
       status: 'pass',
       detail:
-        'The popup exposes role="dialog", aria-modal="true", and an accessible name, so assistive tech announces it as a modal and confines review to its contents.',
+        'The popup exposes role="dialog", aria-modal="true", and an accessible name, so assistive technology announces it as a modal and scopes navigation to its contents.',
       evidence: `role="dialog", aria-modal="true", name: “${name}”`,
     };
   }
@@ -53,12 +53,12 @@ const checkDialogSemantics: Probe = (node) => {
     ...meta,
     status: 'fail',
     detail:
-      'The popup is a plain container. A screen reader never announces a dialog, gives no name, and lets the user wander into the page behind it.',
+      'The popup is a plain container with no dialog role, name, or modal semantics. Assistive technology does not announce a dialog, and users can navigate into the page behind it.',
     evidence: `missing: ${missing.join(', ')}`,
   };
 };
 
-// 2. Focus trap — Tab / Shift+Tab cycle stays inside (WCAG 2.1.2 + APG) ------
+// 2. Focus trap, Tab / Shift+Tab cycle stays inside (WCAG 2.1.2 + APG) ------
 const checkFocusTrap: Probe = (node) => {
   const meta = {
     id: 'ix:focus-trap',
@@ -96,15 +96,15 @@ const checkFocusTrap: Probe = (node) => {
       ...meta,
       status: 'pass',
       detail:
-        'Simulated Tab at the last control and Shift+Tab at the first — focus wrapped inside the dialog both ways, so keyboard users cannot get lost behind the popup.',
-      evidence: 'Tab→wraps to first; Shift+Tab→wraps to last',
+        'Tab from the last control and Shift+Tab from the first both wrap within the dialog, so keyboard focus stays inside the popup.',
+      evidence: 'Tab wraps to first; Shift+Tab wraps to last',
     };
   }
   return {
     ...meta,
     status: 'fail',
     detail:
-      'Focus is not trapped. Pressing Tab past the last control escapes to the page behind the popup, where a keyboard or screen-reader user gets stranded.',
+      'Focus is not contained. Tabbing past the last control moves focus into the page behind the popup instead of cycling within it.',
     evidence: `Tab wrap: ${wrappedForward ? 'ok' : 'FAILED'}; Shift+Tab wrap: ${
       wrappedBackward ? 'ok' : 'FAILED'
     }`,
@@ -129,16 +129,16 @@ const checkEscape: Probe = (node) => {
     return {
       ...meta,
       status: 'pass',
-      detail: 'An Escape keypress is handled and dismisses the dialog — the expected exit for a modal.',
-      evidence: 'keydown Escape → handled (preventDefault)',
+      detail: 'The Escape key is handled and closes the dialog, the expected exit for a modal.',
+      evidence: 'keydown Escape handled (preventDefault)',
     };
   }
   return {
     ...meta,
     status: 'fail',
     detail:
-      'Escape does nothing. The only way out is a mouse click on the “×”, which keyboard and screen-reader users may never reach.',
-    evidence: 'keydown Escape → not handled',
+      'Escape is not handled. The dialog can only be closed by clicking the close control, which is not reliably reachable by keyboard or screen-reader users.',
+    evidence: 'keydown Escape not handled',
   };
 };
 
@@ -159,7 +159,7 @@ const checkFocusReturn: Probe = (node) => {
       ...meta,
       status: 'pass',
       detail:
-        'On open, focus is moved into the dialog; the triggering control is remembered and focus is restored to it on close, so the user never loses their place.',
+        'On open, focus moves into the dialog. The triggering control is stored and focus returns to it on close, preserving the user’s position.',
       evidence: `return target: ${returnTarget.tagName.toLowerCase()}${
         focusInside ? '; focus currently inside dialog' : ''
       }`,
@@ -169,7 +169,7 @@ const checkFocusReturn: Probe = (node) => {
     ...meta,
     status: 'fail',
     detail:
-      'Focus is never placed in the dialog and no return target is recorded. On close, focus drops to the top of the page and the user must start over.',
+      'Focus is not moved into the dialog and no return target is recorded. On close, focus resets to the top of the page.',
     evidence: 'no return target captured',
   };
 };
@@ -205,7 +205,7 @@ const checkFocusIndicator: Probe = (node) => {
       ...meta,
       status: 'pass',
       detail:
-        'Every focusable control shows a clear focus ring when focused, so sighted keyboard users can always see where they are.',
+        'Every focusable control renders a visible focus indicator, so keyboard users can see the current focus position.',
       evidence: `${withRing}/${focusables.length} controls show a focus indicator`,
     };
   }
@@ -213,7 +213,7 @@ const checkFocusIndicator: Probe = (node) => {
     ...meta,
     status: 'fail',
     detail:
-      'Focused controls show no visible indicator (the outline is suppressed), leaving sighted keyboard users unable to tell where focus is.',
+      'Focused controls render no visible indicator because the outline is suppressed, so keyboard users cannot see the current focus position.',
     evidence: `${withRing}/${focusables.length} controls show a focus indicator`,
   };
 };

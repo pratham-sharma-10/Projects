@@ -52,7 +52,7 @@ export default function Controls({
       </div>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-        {/* Before / After — the hero toggle */}
+        {/* Before / After, the hero toggle */}
         <div>
           <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wide text-alia-ink-muted">
             Build

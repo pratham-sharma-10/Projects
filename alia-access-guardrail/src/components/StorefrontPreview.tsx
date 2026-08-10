@@ -14,8 +14,8 @@ interface Props {
 
 /**
  * A simulated Shopify product page with the Alia popup rendered on top. The
- * storefront chrome is intentionally muted so the popup — the thing under
- * audit — is the visual focus. The "Get the offer" launcher is the popup's
+ * storefront chrome is intentionally muted so the popup, the thing under
+ * audit, is the visual focus. The "Get the offer" launcher is the popup's
  * trigger; closing the remediated popup returns focus here (APG).
  */
 export default function StorefrontPreview({
@@ -43,7 +43,7 @@ export default function StorefrontPreview({
         </div>
       </div>
 
-      {/* Simulated storefront (decorative — hidden from the a11y tree so it
+      {/* Simulated storefront (decorative, hidden from the a11y tree so it
           doesn't muddy the audit of the popup itself). */}
       <div className="pointer-events-none select-none px-6 py-5" aria-hidden="true">
         <div className="flex items-center justify-between">

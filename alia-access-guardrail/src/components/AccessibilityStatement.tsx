@@ -8,7 +8,7 @@ interface Props {
 
 /**
  * Auto-generated, honestly-worded conformance statement. Deliberately labeled
- * as a self-assessment illustration — it never claims a certified audit or full
+ * as a self-assessment illustration, it never claims a certified audit or full
  * legal compliance.
  */
 function buildStatement(report: AuditReport, fixture: FixtureContent): string {
@@ -23,11 +23,11 @@ function buildStatement(report: AuditReport, fixture: FixtureContent): string {
 
   if (failCount === 0 && warnCount === 0) {
     return [
-      `Accessibility statement — “${fixture.name}” popup`,
+      `Accessibility statement for the “${fixture.name}” popup`,
       ``,
       `Self-assessment as of ${date}.`,
       ``,
-      `This popup has been evaluated against ${standards}. All ${passCount} automated and interactive checks in this assessment passed, including color contrast, form-field labelling, text alternatives, modal dialog semantics, keyboard focus trapping, Escape-to-close, focus return, and a visible focus indicator.`,
+      `This popup has been evaluated against ${standards}. All ${passCount} automated and interactive checks in this assessment passed, including color contrast, form-field labeling, text alternatives, modal dialog semantics, keyboard focus containment, Escape-to-close, focus return, and a visible focus indicator.`,
       ``,
       `On the criteria tested, the popup conforms to WCAG 2.2 AA. We are committed to keeping it accessible and welcome feedback at accessibility@yourstore.example.`,
       ``,
@@ -40,7 +40,7 @@ function buildStatement(report: AuditReport, fixture: FixtureContent): string {
     .map((c) => `${c.title} (${c.citation.label})`);
 
   return [
-    `Accessibility statement — “${fixture.name}” popup`,
+    `Accessibility statement for the “${fixture.name}” popup`,
     ``,
     `Self-assessment as of ${date}.`,
     ``,
@@ -84,7 +84,7 @@ export default function AccessibilityStatement({ report, fixture }: Props) {
           onClick={onCopy}
           className="shrink-0 rounded-alia-sm border border-alia-border-strong bg-alia-surface px-3 py-1.5 text-xs font-semibold text-alia-ink transition hover:bg-alia-surface-2"
         >
-          {copied ? 'Copied ✓' : 'Copy'}
+          {copied ? 'Copied' : 'Copy'}
         </button>
       </div>
 
@@ -93,14 +93,14 @@ export default function AccessibilityStatement({ report, fixture }: Props) {
           conformant ? 'bg-alia-pass-bg text-alia-pass' : 'bg-alia-warn-bg text-alia-warn'
         }`}
       >
-        {conformant ? 'Draft — conforms on tested criteria' : 'Draft — known barriers disclosed'}
+        {conformant ? 'Draft: conforms on tested criteria' : 'Draft: known barriers disclosed'}
       </span>
 
       <pre className="mt-3 max-h-64 overflow-auto whitespace-pre-wrap rounded-alia-sm bg-alia-surface-2 p-3.5 font-mono text-[12px] leading-relaxed text-alia-ink-soft">
         {statement}
       </pre>
       <p className="mt-2 text-[11px] text-alia-ink-muted">
-        Illustration only — not a certified audit or legal compliance determination.
+        Illustration only. Not a certified audit or a legal compliance determination.
       </p>
     </section>
   );

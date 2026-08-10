@@ -14,7 +14,7 @@ export type FixtureId = 'welcome' | 'exit-intent' | 'quiz';
  *  honest: a genuine failure reads FAIL, never a softened "needs improvement". */
 export type CheckStatus = 'pass' | 'warn' | 'fail';
 
-/** Where a check came from — a real static engine or our interactive probes. */
+/** Where a check came from, a real static engine or our interactive probes. */
 export type CheckSource = 'axe-core' | 'interactive';
 
 export interface Citation {
@@ -84,7 +84,7 @@ export interface FixtureContent {
   };
   /** Optional single-select quiz (quiz fixture uses one). */
   quiz?: {
-    /** Question text — becomes the group's accessible name when remediated. */
+    /** Question text, becomes the group's accessible name when remediated. */
     question: string;
     options: QuizOption[];
   };

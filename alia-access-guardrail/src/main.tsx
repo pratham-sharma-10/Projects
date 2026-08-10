@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import '@fontsource-variable/inter'; // self-hosted Inter — no external CDN
+import '@fontsource-variable/inter'; // self-hosted Inter, no external CDN
 import App from './App';
 import './index.css';
 

@@ -4,7 +4,7 @@ import { CITATIONS } from './citations';
 
 // The axe-core rules we surface. Each maps to a scorecard row with a citation
 // and a plain-language title. Everything here is a real static WCAG rule run by
-// Deque's engine against the live popup DOM — nothing is simulated.
+// Deque's engine against the live popup DOM, nothing is simulated.
 interface RuleMeta {
   title: string;
   citation: Citation;
@@ -94,7 +94,7 @@ export async function runAxeChecks(node: HTMLElement): Promise<CheckResult[]> {
         citation: meta.citation,
         status: 'warn',
         source: 'axe-core',
-        detail: `Needs a human check — axe could not fully determine this automatically. ${incomplete.help}`,
+        detail: `Requires manual review. axe-core could not determine this automatically. ${incomplete.help}`,
         evidence: summarizeNodes(incomplete.nodes),
       });
       continue;
@@ -112,7 +112,7 @@ export async function runAxeChecks(node: HTMLElement): Promise<CheckResult[]> {
         evidence: `${pass.nodes.length} element(s) checked`,
       });
     }
-    // else: inapplicable — omit this rule for this fixture.
+    // else: inapplicable, omit this rule for this fixture.
   }
 
   return rows;

@@ -4,7 +4,7 @@
 
 /*
   ============================================================================
-  ALIA BRAND TOKENS — SINGLE SOURCE OF TRUTH
+  ALIA BRAND TOKENS, SINGLE SOURCE OF TRUTH
   ============================================================================
   Every color, shadow, and radius in the app resolves to one of these
   variables (wired into Tailwind in tailwind.config.js). To re-skin the whole
@@ -16,12 +16,12 @@
   The live site (aliapopups.com) and Shopify listing were unreachable from the
   build sandbox's network egress proxy, so exact hexes could not be sampled.
   Alia's own popup editor exposes Text / Background / Accent / Accent-Foreground
-  slots — these variables mirror that model so a correction is a 4-line edit.
+  slots, these variables mirror that model so a correction is a 4-line edit.
   ============================================================================
 */
 :root {
   /* Surfaces */
-  --alia-bg: #f6f7f9; /* app canvas — soft off-white */
+  --alia-bg: #f6f7f9; /* app canvas, soft off-white */
   --alia-surface: #ffffff; /* cards / panels */
   --alia-surface-2: #f1f3f6; /* insets, code, subtle fills */
 
@@ -35,11 +35,11 @@
   --alia-accent-hover: #4338ca;
   --alia-accent-fg: #ffffff; /* text/icon on accent */
 
-  /* Borders / dividers (soft — we lean on shadow, not heavy rules) */
+  /* Borders / dividers (soft, we lean on shadow, not heavy rules) */
   --alia-border: #e6e8ec;
   --alia-border-strong: #d3d7de;
 
-  /* Status palette — WCAG-AA against white surfaces */
+  /* Status palette, WCAG-AA against white surfaces */
   --alia-pass: #067647;
   --alia-pass-bg: #e7f6ee;
   --alia-warn: #9a6700;
@@ -98,7 +98,7 @@ body {
   border: 0;
 }
 
-/* Subtle entrance used by panels — restrained, ~200ms. */
+/* Subtle entrance used by panels, restrained, ~200ms. */
 @keyframes alia-fade-up {
   from {
     opacity: 0;
@@ -119,7 +119,7 @@ body {
   ============================================================================
   These classes style the *audited artifact* (the simulated Alia popup), NOT
   the Guardrail chrome. The `.is-broken` / `.is-remediated` variants are what
-  the audit engine measures for real — the broken variant deliberately removes
+  the audit engine measures for real, the broken variant deliberately removes
   focus indicators and uses sub-threshold contrast so the checks genuinely
   FAIL. Do not "fix" the broken styles; they are the point of the demo.
   ============================================================================
@@ -141,7 +141,7 @@ body {
   outline-offset: 2px;
 }
 
-/* Broken: focus indicator suppressed — the classic accessibility failure. */
+/* Broken: focus indicator suppressed, the classic accessibility failure. */
 .fx-broken :where(button, input, a, [tabindex]):focus,
 .fx-broken :where(button, input, a, [tabindex]):focus-visible {
   outline: none;
@@ -149,16 +149,16 @@ body {
 }
 
 /* Text contrast tokens for the fixtures --------------------------------- */
-/* Remediated body copy — passes 4.5:1 on white. */
+/* Remediated body copy, passes 4.5:1 on white. */
 .fx-remediated .fx-muted {
   color: #4b5563;
 }
-/* Broken body copy — ~2.3:1 on white, fails WCAG 1.4.3. */
+/* Broken body copy, ~2.3:1 on white, fails WCAG 1.4.3. */
 .fx-broken .fx-muted {
   color: #c3c9d4;
 }
 
-/* Remediated primary button — accessible contrast. */
+/* Remediated primary button, accessible contrast. */
 .fx-remediated .fx-cta {
   background: #4f46e5;
   color: #ffffff;
@@ -166,7 +166,7 @@ body {
 .fx-remediated .fx-cta:hover {
   background: #4338ca;
 }
-/* Broken primary button — pale accent, ~1.9:1 text contrast, fails 1.4.3. */
+/* Broken primary button, pale accent, ~1.9:1 text contrast, fails 1.4.3. */
 .fx-broken .fx-cta {
   background: #c7c9f5;
   color: #ffffff;
@@ -285,7 +285,7 @@ body {
   height: 16px;
   accent-color: var(--alia-accent);
 }
-/* Faux radio for the broken build — looks like a control, has no semantics. */
+/* Faux radio for the broken build, looks like a control, has no semantics. */
 .fx-fauxradio {
   width: 16px;
   height: 16px;
@@ -351,7 +351,7 @@ body {
   color: #12141a;
   text-decoration: underline;
 }
-/* Broken decline — low-contrast div. */
+/* Broken decline, low-contrast div. */
 .fx-broken .fx-decline {
   color: #c3c9d4;
 }

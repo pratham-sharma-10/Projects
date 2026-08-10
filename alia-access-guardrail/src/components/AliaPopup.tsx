@@ -18,7 +18,7 @@ interface Props {
 /**
  * The audited artifact: a realistic Alia-style modal popup.
  *
- * The SAME copy renders in both builds — only the accessibility scaffolding
+ * The SAME copy renders in both builds, only the accessibility scaffolding
  * differs, and the difference is real (not cosmetic):
  *
  *   remediated  → role="dialog" + aria-modal, labelled/described, a real focus
@@ -54,7 +54,7 @@ export default function AliaPopup({
     if (remediated) {
       // Capture where focus was, so we can return it on close (APG requirement).
       const target = returnFocusTo ?? (document.activeElement as HTMLElement | null);
-      // Expose the captured target as live state the audit can verify — this is
+      // Expose the captured target as live state the audit can verify, this is
       // the real element captured at open time, not a hard-coded flag.
       (node as unknown as { __aliaReturnTarget?: HTMLElement | null }).__aliaReturnTarget =
         target && target.isConnected ? target : null;
@@ -71,7 +71,7 @@ export default function AliaPopup({
       };
     }
 
-    // Broken build: deliberately leaves focus wherever it was — no move in,
+    // Broken build: deliberately leaves focus wherever it was, no move in,
     // no return target, no trap. This is the failure the audit reports.
     (node as unknown as { __aliaReturnTarget?: HTMLElement | null }).__aliaReturnTarget = null;
     return undefined;
@@ -137,7 +137,7 @@ export default function AliaPopup({
             <img className="fx-hero" src={fixture.image.src} />
           )}
 
-          {/* Heading is a styled div — no heading semantics for a screen reader. */}
+          {/* Heading is a styled div, no heading semantics for a screen reader. */}
           <div className="fx-heading">{fixture.heading}</div>
           <p className="fx-muted fx-body">{fixture.body}</p>
 
@@ -146,7 +146,7 @@ export default function AliaPopup({
               <div className="fx-quiz-q">{fixture.quiz.question}</div>
               <div className="fx-quiz-opts">
                 {fixture.quiz.options.map((opt) => (
-                  // Clickable divs — no radio semantics, not keyboard reachable.
+                  // Clickable divs, no radio semantics, not keyboard reachable.
                   <div key={opt.id} className="fx-quiz-opt" onClick={() => {}}>
                     <span className="fx-fauxradio" />
                     {opt.label}
@@ -158,7 +158,7 @@ export default function AliaPopup({
 
           <div className="fx-field">
             {/* Looks labeled, but the text is a plain <div> with no
-                programmatic association — and no placeholder — so the input has
+                programmatic association, and no placeholder, so the input has
                 no accessible name at all (axe: label; SR announces "blank"). */}
             <div className="fx-label">{fixture.emailLabel}</div>
             <input className="fx-input" type="email" />
@@ -167,7 +167,7 @@ export default function AliaPopup({
           <button className="fx-cta" type="button">
             {fixture.ctaLabel}
           </button>
-          {/* Decline is a div — not a real, focusable control. */}
+          {/* Decline is a div, not a real, focusable control. */}
           <div className="fx-decline" onClick={onClose}>
             {fixture.declineLabel}
           </div>

@@ -43,7 +43,7 @@ export function scoreBand(score: number): 'pass' | 'warn' | 'fail' {
 }
 
 export function scoreLabel(score: number): string {
-  if (score >= 90) return 'Ready to ship';
-  if (score >= 60) return 'Needs work';
-  return 'Not accessible';
+  if (score >= 90) return 'Conformant';
+  if (score >= 60) return 'Needs remediation';
+  return 'Non-conformant';
 }

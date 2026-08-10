@@ -4,7 +4,7 @@ import type { FixtureContent, FixtureId } from '../types';
 // Canned popup configurations. These stand in for the popups a merchant would
 // build in Alia's editor. Each renders as a real <dialog>-style modal via
 // <AliaPopup>; the SAME content is rendered in both the "broken" (Before) and
-// "remediated" (After) builds — only the accessibility scaffolding differs,
+// "remediated" (After) builds, only the accessibility scaffolding differs,
 // which is exactly what the audit measures.
 //
 // Slightly different markup per fixture (an image here, a quiz radio group
@@ -31,7 +31,7 @@ export const FIXTURES: Record<FixtureId, FixtureContent> = {
   welcome: {
     id: 'welcome',
     name: '10% Off Welcome',
-    blurb: 'First-visit email capture — the highest-traffic popup on the store.',
+    blurb: 'First-visit email capture, the highest-traffic popup on the store.',
     heading: 'Get 10% off your first order',
     body: 'Join the list for early access to drops and a welcome code, straight to your inbox.',
     emailLabel: 'Email address',
@@ -42,8 +42,8 @@ export const FIXTURES: Record<FixtureId, FixtureContent> = {
   'exit-intent': {
     id: 'exit-intent',
     name: 'Exit-Intent Discount',
-    blurb: 'Fires when the cursor leaves the viewport — includes a hero image.',
-    heading: 'Wait — here’s 15% to stay',
+    blurb: 'Fires when the cursor leaves the viewport, includes a hero image.',
+    heading: 'Wait, here’s 15% to stay',
     body: 'Leaving so soon? Take an extra 15% off your cart if you check out in the next 10 minutes.',
     emailLabel: 'Email address',
     emailPlaceholder: 'you@example.com',
@@ -51,7 +51,7 @@ export const FIXTURES: Record<FixtureId, FixtureContent> = {
     declineLabel: 'No thanks',
     image: {
       src: giftSvg,
-      alt: 'Illustration of a wrapped gift box with a bow — a 15% discount offer.',
+      alt: 'Illustration of a wrapped gift box with a bow, a 15% discount offer.',
     },
   },
   quiz: {

@@ -98,9 +98,11 @@ export default function App() {
             />
             {!isOpen && (
               <p className="mt-2 text-[12px] text-alia-ink-muted">
-                Popup closed — focus{' '}
-                {mode === 'remediated' ? 'returned to the “Get the offer” trigger.' : 'was dropped (no return target).'}{' '}
-                Reopen it to re-run the audit.
+                Popup closed. Focus{' '}
+                {mode === 'remediated'
+                  ? 'returned to the “Get the offer” trigger.'
+                  : 'was not returned to a trigger.'}{' '}
+                Reopen the popup to re-run the audit.
               </p>
             )}
             <div className="mt-4">
@@ -127,11 +129,11 @@ export default function App() {
 
       <footer className="mt-12 border-t border-alia-border pt-5 text-[12px] leading-relaxed text-alia-ink-muted">
         <p>
-          Alia Access Guardrail — prototype. Checks run entirely client-side against the live popup
-          DOM: <strong className="font-semibold text-alia-ink-soft">axe-core</strong> for static WCAG
-          rules and custom live probes for keyboard behavior. No backend, no customer data. Brand
-          colors are centralized in <code className="rounded bg-alia-surface-2 px-1">src/index.css</code>{' '}
-          for exact Alia matching.
+          Alia Access Guardrail prototype. All checks run client-side against the live popup DOM:{' '}
+          <strong className="font-semibold text-alia-ink-soft">axe-core</strong> for static WCAG
+          rules and custom probes for keyboard behavior. No backend and no customer data. Brand colors
+          are centralized in <code className="rounded bg-alia-surface-2 px-1">src/index.css</code> for
+          exact Alia matching.
         </p>
       </footer>
     </div>

@@ -10,7 +10,7 @@ export interface SRLine {
 
 // ---------------------------------------------------------------------------
 // A faithful-enough screen-reader transcript, generated from the LIVE popup DOM
-// (roles, accessible names, states) — not a hand-written script. It models what
+// (roles, accessible names, states), not a hand-written script. It models what
 // a user would hear as the popup opens and they Tab through it, so a sighted
 // audience can see an invisible failure mode made concrete.
 // ---------------------------------------------------------------------------
@@ -41,7 +41,7 @@ function announceControl(el: HTMLElement): SRLine {
     if (!name) {
       return {
         kind: 'warn',
-        text: `Edit text, blank.${required ? ' Required.' : ''} — no label, so the user has no idea what to type.`,
+        text: `Edit text, blank.${required ? ' Required.' : ''} No label is associated, so the field is announced with no name.`,
       };
     }
     return {
@@ -80,7 +80,7 @@ export function buildScreenReaderScript(node: HTMLElement): SRLine[] {
   } else {
     lines.push({
       kind: 'warn',
-      text: 'No dialog boundary announced. The screen reader treats this as ordinary page text and keeps reading the storefront behind it.',
+      text: 'No dialog boundary announced. Assistive technology treats this as ordinary page text and continues reading the storefront behind it.',
     });
   }
 
@@ -97,7 +97,7 @@ export function buildScreenReaderScript(node: HTMLElement): SRLine[] {
   if (!isDialog && fauxCount > 0) {
     lines.push({
       kind: 'warn',
-      text: `${fauxCount} options look selectable but are plain text — a keyboard or screen-reader user cannot choose one.`,
+      text: `${fauxCount} options are rendered as plain text with no control semantics and cannot be selected by keyboard or screen reader.`,
     });
   }
 

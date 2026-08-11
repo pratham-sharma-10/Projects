@@ -54,7 +54,29 @@ export async function runAxeChecks(node: HTMLElement): Promise<CheckResult[]> {
     resultTypes: ['violations', 'passes', 'incomplete'],
   };
 
-  const results = await axe.run(node, options);
+  // The simulated storefront behind the popup is demo scenery, not part of the
+  // audited artifact. Its skeleton fills intersect the popup's bounding boxes,
+  // which makes axe-core's contrast check report "background could not be
+  // determined". Hide the scenery (marked data-audit-ignore) for the duration
+  // of the axe pass so the popup is measured on its own, then restore it.
+  // In production this audit runs against the merchant's real storefront and
+  // no such exclusion applies.
+  const scenery = Array.from(
+    node.ownerDocument.querySelectorAll<HTMLElement>('[data-audit-ignore]'),
+  );
+  const prevVisibility = scenery.map((el) => el.style.visibility);
+  scenery.forEach((el) => {
+    el.style.visibility = 'hidden';
+  });
+
+  let results;
+  try {
+    results = await axe.run(node, options);
+  } finally {
+    scenery.forEach((el, i) => {
+      el.style.visibility = prevVisibility[i];
+    });
+  }
   const rows: CheckResult[] = [];
 
   const summarizeNodes = (nodes: Result['nodes']): string => {

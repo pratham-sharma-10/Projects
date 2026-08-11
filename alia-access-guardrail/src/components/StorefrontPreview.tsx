@@ -30,9 +30,17 @@ export default function StorefrontPreview({
   const launcherRef = useRef<HTMLButtonElement | null>(null);
 
   return (
-    <div className="relative h-full min-h-[560px] overflow-hidden rounded-alia bg-white">
-      {/* Browser chrome */}
-      <div className="flex items-center gap-2 border-b border-alia-border bg-alia-surface-2 px-4 py-2.5">
+    // min-height gives the tallest fixture (Quiz) room to render without an
+    // internal scrollbar; a scrolling dialog also destabilizes the contrast
+    // probe (the close control overlaps scrolled content).
+    <div className="relative h-full min-h-[660px] overflow-hidden rounded-alia bg-white">
+      {/* Browser chrome. data-audit-ignore: this is simulation scenery, not part
+          of the audited popup; the audit engine hides it while axe-core runs so
+          the backdrop cannot distort the popup's contrast computation. */}
+      <div
+        data-audit-ignore
+        className="flex items-center gap-2 border-b border-alia-border bg-alia-surface-2 px-4 py-2.5"
+      >
         <span className="flex gap-1.5" aria-hidden="true">
           <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
           <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
@@ -44,8 +52,9 @@ export default function StorefrontPreview({
       </div>
 
       {/* Simulated storefront (decorative, hidden from the a11y tree so it
-          doesn't muddy the audit of the popup itself). */}
-      <div className="pointer-events-none select-none px-6 py-5" aria-hidden="true">
+          doesn't muddy the audit of the popup itself). data-audit-ignore: see
+          the note on the browser chrome above. */}
+      <div data-audit-ignore className="pointer-events-none select-none px-6 py-5" aria-hidden="true">
         <div className="flex items-center justify-between">
           <div className="text-lg font-bold tracking-tight text-alia-ink">NORTHSHORE</div>
           <div className="flex gap-5 text-sm text-alia-ink-soft">

@@ -1,0 +1,66 @@
+{
+  "_notice": "All names, projects, organizations, and scenarios in this file are fictional demo data.",
+  "context": [
+    {
+      "kind": "interaction",
+      "title": "Recruiter update",
+      "body": "Recruiter said the hiring team expects to share feedback next week.",
+      "project": "Northstar Job Search",
+      "person": "Alex Rivera",
+      "relationship": "Recruiter",
+      "source": "fictional-demo"
+    },
+    {
+      "kind": "update",
+      "title": "Portfolio redesign checkpoint",
+      "body": "Case study outline is done. The remaining work is the architecture diagram and a short demo video.",
+      "project": "Portfolio Refresh",
+      "source": "fictional-demo"
+    },
+    {
+      "kind": "interaction",
+      "title": "Mentor conversation",
+      "body": "Discussed positioning as a technical product marketer. Agreed to send the revised portfolio when ready.",
+      "project": "Portfolio Refresh",
+      "person": "Maya Chen",
+      "relationship": "Mentor",
+      "source": "fictional-demo"
+    }
+  ],
+  "open_loops": [
+    {
+      "title": "Receive hiring-team feedback",
+      "description": "Recruiter expects an update next week.",
+      "owner": "external",
+      "status": "waiting",
+      "priority": "high",
+      "project": "Northstar Job Search",
+      "person": "Alex Rivera",
+      "expectedAt": "2030-02-08T17:00:00Z"
+    },
+    {
+      "title": "Send revised portfolio to mentor",
+      "owner": "me",
+      "priority": "medium",
+      "project": "Portfolio Refresh",
+      "person": "Maya Chen",
+      "dueAt": "2030-02-04T17:00:00Z"
+    },
+    {
+      "title": "Record 60-second demo video",
+      "description": "Show get_daily_brief and get_context in one flow.",
+      "owner": "me",
+      "priority": "high",
+      "project": "Portfolio Refresh",
+      "dueAt": "2030-02-03T17:00:00Z"
+    }
+  ],
+  "decisions": [
+    {
+      "title": "Keep personal data local",
+      "decision": "Use a local SQLite database outside the Git repository and avoid cloud dependencies in v0.1.",
+      "rationale": "The product handles personal context, so privacy and portability should be architectural defaults rather than documentation-only promises.",
+      "project": "Portfolio Refresh"
+    }
+  ]
+}

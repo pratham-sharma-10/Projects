@@ -1,0 +1,35 @@
+# Dependencies / build
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Momentum private state — NEVER COMMIT
+.momentum-mcp/
+.momentum/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+private-data/
+exports/
+backups/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*

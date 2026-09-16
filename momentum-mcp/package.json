@@ -1,0 +1,48 @@
+{
+  "name": "momentum-mcp",
+  "version": "0.1.1",
+  "description": "A local-first MCP server that gives AI assistants continuity across commitments, projects, people, decisions, and open loops.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "productivity",
+    "local-first",
+    "sqlite",
+    "ai-agent"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "PRIVACY.md",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --experimental-strip-types src/server.ts",
+    "start": "node dist/src/server.js",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "privacy-check": "node --experimental-strip-types scripts/privacy-check.ts",
+    "demo:seed": "node --experimental-strip-types scripts/seed-demo.ts",
+    "demo:brief": "node --experimental-strip-types scripts/demo-brief.ts",
+    "check": "npm run privacy-check && npm test && npm run build",
+    "cli": "node dist/src/cli.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^7.0.2"
+  },
+  "bin": {
+    "momentum": "dist/src/cli.js"
+  }
+}

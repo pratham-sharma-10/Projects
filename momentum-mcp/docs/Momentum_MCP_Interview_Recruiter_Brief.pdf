@@ -1,0 +1,1112 @@
+%PDF-1.4
+%ASCII-PDF                                         
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 8 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 14 0 R /MediaBox [ 0 0 612 792 ] /Parent 13 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Contents 15 0 R /MediaBox [ 0 0 612 792 ] /Parent 13 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Contents 16 0 R /MediaBox [ 0 0 612 792 ] /Parent 13 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+9 0 obj
+<<
+/Contents 17 0 R /MediaBox [ 0 0 612 792 ] /Parent 13 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/Contents 18 0 R /MediaBox [ 0 0 612 792 ] /Parent 13 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+11 0 obj
+<<
+/PageMode /UseNone /Pages 13 0 R /Type /Catalog
+>>
+endobj
+12 0 obj
+<<
+/Author (\(anonymous\)) /CreationDate (D:20260920204505+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260920204505+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (\(unspecified\)) /Title (\(anonymous\)) /Trapped /False
+>>
+endobj
+13 0 obj
+<<
+/Count 5 /Kids [ 5 0 R 6 0 R 7 0 R 9 0 R 10 0 R ] /Type /Pages
+>>
+endobj
+14 0 obj
+<<
+/Length 6874
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+BT /F1 7.5 Tf 9 TL ET
+.533333 .533333 .533333 rg
+BT 1 0 0 1 211.8713 27.36 Tm (Momentum MCP - Interview & Recruiter Brief   |   Page 1) Tj T* ET
+Q
+q
+1 0 0 1 52.8 718.4 cm
+q
+.078431 .156863 .27451 rg
+BT 1 0 0 1 0 4 Tm /F2 24 Tf 28 TL 159.204 0 Td (Momentum MCP) Tj T* -159.204 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 694.4 cm
+q
+BT 1 0 0 1 0 3 Tm 171.5665 0 Td 16 TL /F2 13 Tf .121569 .305882 .47451 rg (Interview & Recruiter Brief) Tj T* -171.5665 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 678.4 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 156.78 0 Td (A local-first continuity layer for AI assistants) Tj T* -156.78 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 603.9 cm
+q
+.85098 .917647 .968627 RG
+.5 w
+.933333 .956863 .984314 rg
+n -7 -7 520.4 76.5 re B*
+Q
+q
+BT 1 0 0 1 0 53.1 Tm 12.5 TL /F2 9.4 Tf 0 0 0 rg (30-second version) Tj /F1 9.4 Tf  T* (I built Momentum MCP after noticing that my real productivity problem was not creating tasks - it was reconstructing) Tj T* (context. I wanted a simple way for an AI assistant to know what I was working on, what I was waiting for, what decisions) Tj T* (had been made, and why. Momentum stores that context locally and exposes it through narrow MCP tools, so the) Tj T* (reasoning layer can change without losing the user's state.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 585.9 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (GitHub: github.com/pratham-sharma-10/Projects/tree/main/momentum-mcp) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 558.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Why I built this) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 500.9 cm
+q
+BT 1 0 0 1 0 42.5 Tm 13 TL /F2 9.5 Tf 0 0 0 rg (I did not start with "I want to build an MCP server.") Tj /F1 9.5 Tf ( I started with a pattern I kept seeing in my own work: I could) Tj T* (create tasks easily, but I kept losing the context around them. A follow-up might live in one note, a decision in another) Tj T* (conversation, and the reason behind a project choice somewhere else. When I returned to the work later, I had to rebuild) Tj T* (the story in my head.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 468.9 cm
+q
+BT 1 0 0 1 0 16.5 Tm 13 TL /F1 9.5 Tf 0 0 0 rg (That led to a simple product question: ) Tj /F2 9.5 Tf (what if an AI assistant could remember where I left off without needing my) Tj T* (entire life uploaded to another cloud service?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 438.9 cm
+q
+.85098 .917647 .968627 RG
+.5 w
+.933333 .956863 .984314 rg
+n -7 -7 520.4 39 re B*
+Q
+q
+BT 1 0 0 1 0 15.6 Tm 12.5 TL /F2 9.4 Tf 0 0 0 rg (The problem in one line) Tj /F1 9.4 Tf  T* (People do not only lose tasks. They lose context between tasks, conversations, decisions, projects, and follow-ups.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 411.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (What problem does Momentum solve?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 393.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Task managers tell me what to do, but usually not why that task exists.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 374.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 AI chats can be useful in the moment, but I did not want the product to depend on one assistant's conversation history.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 343.9 cm
+q
+BT 1 0 0 1 14 15.7 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Notes preserve information, but they do not naturally distinguish between an open commitment, something I am waiting) Tj T* 7 0 Td (on, and a decision I already made.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 325.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td -0.106742 Tw 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 When I switch between projects, I often spend time reconstructing "where was I?" before I can actually continue working.) Tj T* 0 Tw 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 293.4 cm
+q
+BT 1 0 0 1 0 16.5 Tm 13 TL /F1 9.5 Tf 0 0 0 rg (Momentum turns those loose pieces into a small set of durable objects: ) Tj /F2 9.5 Tf (projects, people, context, open loops, and ) Tj T* (decisions.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 266.4 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Main use cases) Tj T* ET
+Q
+Q
+q
+1 0 0 1 54 128.4 cm
+q
+.85098 .917647 .968627 rg
+n 0 133 504 -19 re f*
+0 0 0 rg
+BT /F2 10 Tf 12 TL ET
+q
+1 0 0 1 5 118 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Use case) Tj T* ET
+Q
+Q
+q
+1 0 0 1 116.6 118 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (What it helps with) Tj T* ET
+Q
+Q
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 5 99 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Daily brief) Tj T* ET
+Q
+Q
+q
+1 0 0 1 116.6 99 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (See open loops, priorities, overdue items, and anything I am waiting on.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 80 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Waiting on someone) Tj T* ET
+Q
+Q
+q
+1 0 0 1 116.6 80 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Track an external dependency separately from a normal task.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 61 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Project handoff to myself) Tj T* ET
+Q
+Q
+q
+1 0 0 1 116.6 61 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Ask "where did I leave this?" and recover recent context, open loops, and decisions.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 42 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Decision memory) Tj T* ET
+Q
+Q
+q
+1 0 0 1 116.6 42 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Store not only what was decided, but why it was decided.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 23 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Relationship follow-up) Tj T* ET
+Q
+Q
+q
+1 0 0 1 116.6 23 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Keep lightweight context around a person and an unresolved follow-up.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 4 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Search) Tj T* ET
+Q
+Q
+q
+1 0 0 1 116.6 4 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Find related tasks, notes, or decisions without remembering where I stored them.) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.666667 .717647 .768627 RG
+.4 w
+n 0 133 m 504 133 l S
+n 0 0 m 504 0 l S
+n 0 0 m 0 133 l S
+n 504 0 m 504 133 l S
+n 0 114 m 504 114 l S
+n 0 95 m 504 95 l S
+n 0 76 m 504 76 l S
+n 0 57 m 504 57 l S
+n 0 38 m 504 38 l S
+n 0 19 m 504 19 l S
+n 111.6 0 m 111.6 133 l S
+Q
+Q
+Q
+q
+1 0 0 1 52.8 101.4 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (How anyone can use it) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 82.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.5 Tm /F1 9.5 Tf 13 TL (There are two ways to use Momentum.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 62.4 cm
+q
+.2 .2 .2 rg
+BT 1 0 0 1 0 2.5 Tm /F2 11.5 Tf 14 TL (1. Local CLI - no AI client required) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+15 0 obj
+<<
+/Length 1878
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+BT /F1 7.5 Tf 9 TL ET
+.533333 .533333 .533333 rg
+BT 1 0 0 1 211.8713 27.36 Tm (Momentum MCP - Interview & Recruiter Brief   |   Page 2) Tj T* ET
+Q
+q
+1 0 0 1 52.8 733.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 momentum brief - see a daily summary.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 715.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 momentum add "Follow up Friday" --project "Job Search" --priority high - create an open loop.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 696.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 momentum waiting - see external dependencies.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 678.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 momentum search "Amazon" - find related context.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 659.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 momentum resolve 3 - close an item.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 639.9 cm
+q
+.2 .2 .2 rg
+BT 1 0 0 1 0 2.5 Tm /F2 11.5 Tf 14 TL (2. MCP client - for conversational use) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 607.9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 16.5 Tm /F1 9.5 Tf 13 TL -0.126095 Tw (An MCP-compatible AI client can call the Momentum tools directly. A user can ask "What am I waiting on?" or "Where did) Tj T* 0 Tw (I leave this project?" and the AI retrieves structured state from Momentum instead of guessing from chat history.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 565.4 cm
+q
+.85098 .917647 .968627 RG
+.5 w
+.933333 .956863 .984314 rg
+n -7 -7 520.4 51.5 re B*
+Q
+q
+BT 1 0 0 1 0 28.1 Tm 12.5 TL /F2 9.4 Tf 0 0 0 rg (Important privacy choice) Tj /F1 9.4 Tf  T* (The real database lives outside the GitHub repository at ~/.momentum-mcp/momentum.db. The public repo contains) Tj T* (source code, tests, docs, and fictional demo data only.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+16 0 obj
+<<
+/Length 6890
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+BT /F1 7.5 Tf 9 TL ET
+.533333 .533333 .533333 rg
+BT 1 0 0 1 211.8713 27.36 Tm (Momentum MCP - Interview & Recruiter Brief   |   Page 3) Tj T* ET
+Q
+q
+1 0 0 1 52.8 728.4 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Tech stack) Tj T* ET
+Q
+Q
+q
+1 0 0 1 54 571.4 cm
+q
+.85098 .917647 .968627 rg
+n 0 152 504 -19 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 5 137 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Technology) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 137 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Why it is there) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 118 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (TypeScript) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 118 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Main language for the server, CLI, tests, and tooling.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 99 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Node.js 24) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 99 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Runtime, including  built-in SQLite support.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 80 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Model Context Protocol \(MCP\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 80 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Lets compatible AI clients discover and call Momentum tools.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 61 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (SQLite) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 61 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Local persistence for projects, people, context, decisions, and open loops.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 42 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Zod) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 42 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Runtime validation for MCP tool inputs.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 23 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (GitHub Actions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 23 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Runs build, tests, and the privacy check in CI.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 4 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Git + GitHub) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.6 4 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Version control, public documentation, and portfolio distribution.) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.666667 .717647 .768627 RG
+.4 w
+n 0 152 m 504 152 l S
+n 0 0 m 504 0 l S
+n 0 0 m 0 152 l S
+n 504 0 m 504 152 l S
+n 0 133 m 504 133 l S
+n 0 114 m 504 114 l S
+n 0 95 m 504 95 l S
+n 0 76 m 504 76 l S
+n 0 57 m 504 57 l S
+n 0 38 m 504 38 l S
+n 0 19 m 504 19 l S
+n 129.6 0 m 129.6 152 l S
+Q
+Q
+Q
+q
+1 0 0 1 52.8 544.4 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Architecture, in plain English) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 501.9 cm
+q
+.85098 .917647 .968627 RG
+.5 w
+.933333 .956863 .984314 rg
+n -7 -7 520.4 51.5 re B*
+Q
+q
+BT 1 0 0 1 0 28.1 Tm 12.5 TL /F2 9.4 Tf 0 0 0 rg (AI client or local CLI -> Momentum service -> SQLite database) Tj /F1 9.4 Tf  T*  T* (The AI is responsible for reasoning. Momentum is responsible for trustworthy state, retrieval, and bounded actions.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 468.9 cm
+q
+BT 1 0 0 1 0 16.5 Tm 13 TL /F2 9.5 Tf 0 0 0 rg (I intentionally separated reasoning from state.) Tj /F1 9.5 Tf ( That means I do not need to embed a specific model API into the) Tj T* (project. A user can keep the same Momentum data while changing the AI client they prefer.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 441.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Why MCP instead of just building another app?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 422.9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.5 Tm /F1 9.5 Tf 13 TL -0.080868 Tw (A normal productivity app could solve part of this problem, but MCP made the product more interesting for three reasons:) Tj T* 0 Tw ET
+Q
+Q
+q
+1 0 0 1 52.8 390.9 cm
+q
+BT 1 0 0 1 0 16.5 Tm 13 TL /F2 9.5 Tf 0 0 0 rg (1. Portability:) Tj /F1 9.5 Tf ( the same structured context can be used by different MCP-compatible AI clients instead of being locked) Tj T* (into one chatbot.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 358.9 cm
+q
+BT 1 0 0 1 0 16.5 Tm -0.040368 Tw 13 TL /F2 9.5 Tf 0 0 0 rg (2. Tool boundaries:) Tj /F1 9.5 Tf ( I can expose narrow actions such as "get waiting items" or "record decision" rather than handing an) Tj T* 0 Tw (AI unrestricted access to a whole database.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 326.9 cm
+q
+BT 1 0 0 1 0 16.5 Tm 13 TL /F2 9.5 Tf 0 0 0 rg (3. Separation of concerns:) Tj /F1 9.5 Tf ( Momentum owns state; the AI client owns reasoning. That keeps the core product simpler) Tj T* (and more model-agnostic.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 294.9 cm
+q
+BT 1 0 0 1 0 16.5 Tm 13 TL /F2 9.5 Tf 0 0 0 rg (Why not just use a task manager?) Tj /F1 9.5 Tf ( Because the core unit is not only a task. Momentum also stores dependencies,) Tj T* (project context, people, and decision rationale.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 262.9 cm
+q
+BT 1 0 0 1 0 16.5 Tm -0.0887 Tw 13 TL /F2 9.5 Tf 0 0 0 rg (Why not just rely on AI memory?) Tj /F1 9.5 Tf ( I wanted the important state to be explicit, inspectable, portable, and under the user's) Tj T* 0 Tw (control rather than tied to one assistant's hidden memory or chat history.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 235.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Privacy and guardrails) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 217.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Local-first storage by default.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 198.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Private database is outside the Git repository.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 180.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 The app refuses to initialize private storage inside a Git worktree unless a deliberate development override is used.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 161.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 No telemetry in the core project.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 143.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 No model API key is required by Momentum itself.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 124.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Debug logging is metadata-only.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 106.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Public tests and examples use fictional data.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 87.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 A privacy-check script scans the repository for common secret patterns and private database/key files.) Tj T* 7 0 Td ET
+Q
+Q
+ 
+endstream
+endobj
+17 0 obj
+<<
+/Length 6779
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+BT /F1 7.5 Tf 9 TL ET
+.533333 .533333 .533333 rg
+BT 1 0 0 1 211.8713 27.36 Tm (Momentum MCP - Interview & Recruiter Brief   |   Page 4) Tj T* ET
+Q
+q
+1 0 0 1 52.8 728.4 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Why this matters to me as a PMM) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 696.4 cm
+q
+BT 1 0 0 1 0 16.5 Tm 13 TL /F2 9.5 Tf 0 0 0 rg (The biggest learning was not "how to call an MCP tool.") Tj /F1 9.5 Tf ( It was learning how product choices become positioning) Tj T* (choices.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 677.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 ) Tj /F2 9.3 Tf (Context:) Tj /F1 9.3 Tf ( What information does an AI actually need to be useful?) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 659.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 ) Tj /F2 9.3 Tf (Permissions:) Tj /F1 9.3 Tf ( What should an agent be allowed to read or change?) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 640.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 ) Tj /F2 9.3 Tf (Trust:) Tj /F1 9.3 Tf ( How do privacy and user control affect adoption?) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 622.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 ) Tj /F2 9.3 Tf (Value proposition:) Tj /F1 9.3 Tf ( Is the product solving a workflow problem, or only adding "AI-powered" language?) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 603.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 ) Tj /F2 9.3 Tf (Messaging:) Tj /F1 9.3 Tf ( How do I explain an agentic product in concrete user outcomes instead of technical jargon?) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 584.9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.5 Tm /F1 9.5 Tf 13 TL (For me, the value proposition became much clearer than "an MCP server for productivity":) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 560.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F4 13 Tf 16 TL 129.648 0 Td ("Your AI remembers where you left off.") Tj T* -129.648 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 533.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (How I would explain it in an interview) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 513.9 cm
+q
+.2 .2 .2 rg
+BT 1 0 0 1 0 2.5 Tm /F2 11.5 Tf 14 TL (60-second answer) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 429.9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 68.5 Tm /F1 9.5 Tf 13 TL ("I built Momentum MCP after noticing that my biggest productivity cost was not creating tasks, but rebuilding context) Tj T* (when I returned to work. I wanted a local-first layer that could store open loops, project context, people, and decision) Tj T* (rationale, and make that state available to an AI through MCP. I built it in TypeScript on Node with SQLite, added a local) Tj T* (CLI so it is useful even without an AI client, and designed privacy into the architecture by keeping real data outside the) Tj T* (repo and using narrow tools. What made the project interesting for me as a PMM was seeing how technical decisions) Tj T* (around context, permissions, and privacy directly shape positioning, trust, and adoption.") Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 409.9 cm
+q
+.2 .2 .2 rg
+BT 1 0 0 1 0 2.5 Tm /F2 11.5 Tf 14 TL (If a recruiter asks "what did you personally do?") Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 391.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Defined the product problem and the core user questions.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 372.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Reduced the data model to a small set of primitives instead of building a full task manager.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 354.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Chose MCP because I wanted the state layer to work underneath different AI clients.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 335.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Designed the local-first privacy model and repository guardrails.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 317.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Built and tested the server, CLI, persistence layer, and documentation.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 298.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Dogfooded the product locally and used fictional public demo data for sharing.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 271.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (What I would improve next) Tj T* ET
+Q
+Q
+q
+1 0 0 1 52.8 253.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Better ranking for what should appear in the daily brief.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 234.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Deduplication and conflict handling for repeated context.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 216.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Optional calendar/email integrations with explicit permission boundaries.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 197.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 Encrypted backups and an export/import format.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 179.4 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 A lightweight visual interface for non-terminal users.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 160.9 cm
+q
+BT 1 0 0 1 14 3.2 Tm -7 0 Td 12.5 TL /F1 9.3 Tf 0 0 0 rg (\177 More user testing to validate whether "continuity" is the right framing and which workflows create the most value.) Tj T* 7 0 Td ET
+Q
+Q
+q
+1 0 0 1 52.8 133.9 cm
+q
+.121569 .305882 .47451 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL (Recruiter quick facts) Tj T* ET
+Q
+Q
+q
+1 0 0 1 54 60.9 cm
+q
+.933333 .956863 .984314 rg
+n 0 68 104.4 -68 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 5 53 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Project) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 53 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Momentum MCP) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 34 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (One-line description) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 23 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 13.5 Tm /F1 8.5 Tf 11 TL (Local-first continuity layer that lets AI assistants retrieve open loops, project context, people, and) Tj T* (decision rationale.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 4 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Built with) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 4 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (TypeScript, Node.js, MCP, SQLite, Zod, GitHub Actions) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.666667 .717647 .768627 RG
+.4 w
+n 0 68 m 504 68 l S
+n 0 0 m 0 68 l S
+n 504 0 m 504 68 l S
+n 0 0 m 504 0 l S
+n 0 49 m 504 49 l S
+n 0 19 m 504 19 l S
+n 104.4 0 m 104.4 68 l S
+Q
+Q
+Q
+ 
+endstream
+endobj
+18 0 obj
+<<
+/Length 1972
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+BT /F1 7.5 Tf 9 TL ET
+.533333 .533333 .533333 rg
+BT 1 0 0 1 211.8713 27.36 Tm (Momentum MCP - Interview & Recruiter Brief   |   Page 5) Tj T* ET
+Q
+q
+1 0 0 1 54 640.4 cm
+q
+.933333 .956863 .984314 rg
+n 0 106 104.4 -106 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 5 91 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Interfaces) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 91 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (MCP server + local CLI) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 72 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Privacy model) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 72 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Real data stays local and outside the public repository by default.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 53 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Public repo) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 53 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (github.com/pratham-sharma-10/Projects/tree/main/momentum-mcp) Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 34 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (Best demo) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 34 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (momentum brief; momentum waiting; momentum context --project "Momentum MCP") Tj T* ET
+Q
+Q
+q
+1 0 0 1 5 15 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 2.5 Tm /F1 8.5 Tf 11 TL (What it demonstrates) Tj T* ET
+Q
+Q
+q
+1 0 0 1 109.4 4 cm
+q
+.333333 .333333 .333333 rg
+BT 1 0 0 1 0 13.5 Tm /F1 8.5 Tf 11 TL (Product thinking, technical fluency, MCP/tool design, local-first architecture, privacy guardrails, testing,) Tj T* (and PMM framing.) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.666667 .717647 .768627 RG
+.4 w
+n 0 0 m 0 106 l S
+n 504 0 m 504 106 l S
+n 0 0 m 504 0 l S
+n 0 106 m 504 106 l S
+n 0 87 m 504 87 l S
+n 0 68 m 504 68 l S
+n 0 49 m 504 49 l S
+n 0 30 m 504 30 l S
+n 104.4 0 m 104.4 106 l S
+Q
+Q
+Q
+ 
+endstream
+endobj
+xref
+0 19
+0000000000 65535 f 
+0000000061 00000 n 
+0000000122 00000 n 
+0000000229 00000 n 
+0000000341 00000 n 
+0000000456 00000 n 
+0000000651 00000 n 
+0000000846 00000 n 
+0000001041 00000 n 
+0000001160 00000 n 
+0000001355 00000 n 
+0000001551 00000 n 
+0000001621 00000 n 
+0000001902 00000 n 
+0000001987 00000 n 
+0000008913 00000 n 
+0000010843 00000 n 
+0000017785 00000 n 
+0000024616 00000 n 
+trailer
+<<
+/ID 
+[<77d3a0e4d0d4615aab302084fa8ba66f><77d3a0e4d0d4615aab302084fa8ba66f>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 12 0 R
+/Root 11 0 R
+/Size 19
+>>
+startxref
+26640
+%%EOF

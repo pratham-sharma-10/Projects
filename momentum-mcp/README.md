@@ -6,6 +6,13 @@ Momentum is a **local-first Model Context Protocol (MCP) server** that gives AI 
 
 > Status: `v0.1.1` — local single-user MVP with MCP + local CLI.
 
+## Hiring manager / recruiter brief
+
+If you are reviewing this project for a role, start here:
+
+- [Hiring Manager Brief](docs/HIRING_MANAGER_BRIEF.md) - short, human-readable overview of why I built it, the problem, use cases, tech stack, product choices, privacy, and what I personally owned.
+- [PDF version](docs/Momentum_MCP_Hiring_Manager_Brief.pdf)
+
 ## Demo
 
 The repository includes fictional sample data only. The public project contains no personal productivity data. Run `npm run demo:seed` and `npm run demo:brief` for a safe demo.

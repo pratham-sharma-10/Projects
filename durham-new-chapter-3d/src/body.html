@@ -1,0 +1,38 @@
+<title>A New Chapter — Durham, NC</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #1d3f8f; }
+  #scene-root { position: fixed; inset: 0; }
+  #scene-root canvas { display: block; }
+  .card {
+    position: fixed; left: 20px; bottom: 20px; z-index: 5;
+    color: #fdf6e9; font-family: Georgia, 'Times New Roman', serif;
+    background: rgba(16, 26, 52, 0.55); backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 220, 160, 0.25); border-radius: 12px;
+    padding: 14px 18px; max-width: 340px; pointer-events: none;
+  }
+  .card h1 { margin: 0 0 4px; font-size: 19px; font-weight: 600; letter-spacing: 0.4px; }
+  .card p { margin: 0; font-size: 12.5px; line-height: 1.5; opacity: 0.85;
+    font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .card .accent { color: #ffd98c; }
+  #hint {
+    position: fixed; right: 20px; bottom: 20px; z-index: 5;
+    color: rgba(253, 246, 233, 0.75); font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px; background: rgba(16, 26, 52, 0.45); border-radius: 999px;
+    padding: 8px 14px; transition: opacity 0.8s; pointer-events: none;
+  }
+  #hint.pulse { animation: pulse 2.4s ease-in-out infinite; }
+  #hint.gone { opacity: 0; }
+  @keyframes pulse { 0%, 100% { opacity: 0.75; } 50% { opacity: 0.35; } }
+  @media (max-width: 640px) {
+    .card { left: 12px; bottom: 12px; max-width: 260px; padding: 10px 14px; }
+    .card h1 { font-size: 16px; }
+    #hint { display: none; }
+  }
+</style>
+<div id="scene-root"></div>
+<div class="card">
+  <h1>A New Chapter <span class="accent">· Durham, NC</span></h1>
+  <p>Duke '26 → the open road. Coffee, conversations, products, community —
+     and a pathway rising toward everything still to come.</p>
+</div>
+<div id="hint">drag to orbit &nbsp;·&nbsp; scroll to zoom</div>
